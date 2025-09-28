@@ -1,0 +1,533 @@
+@use "sass:map";
+
+$color: (
+  main: #8d9e78, 
+  sub: #3d405b, 
+  func: rgb(168, 50, 121), 
+  reverse: #fcfcfc, 
+  line: #cdcdcd, 
+  active: #ffad00
+);
+
+$node-size: 1em;
+$node-margin: 1em;
+$line-width: .2em;
+$ul-padding: .2em;
+$shift-ul-line: 1em;
+$li-padding-top: 1em;
+
+@mixin size($w, $h) {
+    width: $w;
+    height: $h;
+  }
+
+/** For data-show-count **/
+.timeline ul {
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.5s ease-in-out;
+}
+
+.timeline li {
+  display: block;
+}
+
+/** End data-show-count related styling **/
+
+.timeline.loaded {
+  opacity: 1;
+}
+
+.timeline {
+  display: block;
+  position: relative;
+  opacity: 0;
+  transition: opacity 1s ease-in-out !important;
+
+  small {
+    display: block;
+    opacity: .7;
+    font-size: 1em;
+  }
+
+  .timeline-header {
+    margin-bottom: 1em;
+    border-bottom: .1em solid #eee;
+    padding-bottom: .5em;
+  }
+
+  .header-group > * {
+    display: inline-block;
+  }
+
+  .justify-between {
+    margin:0;
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    vertical-align: middle;
+  }
+
+  .header-icon {
+    margin-right: .5em;
+  }
+
+  .header-widget {
+    backdrop-filter: blur(3px);
+    background-color: hsl(223, 14%, 20%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 2em;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    outline: none;
+    padding: .6em;
+    width: 5em;
+    color: whitesmoke;
+  }
+
+  button.toggle-timeline::before{
+    content: '';
+    display: block;
+    position: absolute;
+    left: 50%;
+    width: .625rem;
+    height: .625rem;
+    margin: 0 auto;
+    border-top: .2em solid white;
+    border-right: .2em solid white;
+  }
+
+  button.toggle-timeline:hover {
+    transform: scale(1.1);
+  }
+
+  .toggle-back{
+    &:hover {
+      box-shadow: 0 -8px 15px rgba(0, 0, 0, 0.3);
+    }
+    
+    &::before {
+      transform: translate(-50%, -50%) rotate(-45deg);
+    }
+  }
+
+  .toggle-forward{
+    &:hover {
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    &::before {
+      transform: translate(-50%, -50%) rotate(135deg);
+    }
+  }
+  
+  .toggle-forward {
+    top: 100%;
+    position: absolute;
+  }
+
+  button.toggle-timeline{
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background-color: #282936;;
+    border: $line-width solid black;
+    outline: transparent;
+    left: 50%;
+    position: relative;
+    margin:  1.5em 0;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
+    margin-left: calc($line-width/2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+
+  ul {
+    list-style-type: none;
+    padding-top: 0;
+    position: relative;
+
+    &::before {
+        content: '';
+        display: block;
+        width: $line-width;
+        background: map.get($color, sub);
+        height: calc(100% - $li-padding-top - $node-size/2 - $line-width/2);
+        position: absolute;
+        top: calc($li-padding-top + $node-size/2 + $line-width/2);
+        bottom: 0;
+        //margin: auto 0;
+        margin-left: calc($line-width/2); // this need to be exactly half the width of the line
+        left: $node-margin;
+    }
+
+    &.rendering {
+      &::before {
+        animation: ripple .5s linear forwards;
+        transform-origin: 50% 0%;
+      }
+    }
+
+  }
+
+  @keyframes ripple {
+    to{
+      transform:scale(1);
+    } 
+    from {
+      transform: scale(0);
+    }
+  }
+
+  ul li {
+    position: relative;
+    margin-left: $node-margin;
+    padding-left: 2em;
+    padding-bottom: 1em;
+    padding-top: $li-padding-top;
+    transition: .2s transform ease-in-out, .8s opacity ease-in-out;
+
+    &:hover,
+    &.active-event {
+      .timeline-event-icon {
+        animation: circle 1.2s infinite;
+        background-color: map.get($color, func);
+        outline: .2em solid white;
+      }
+
+      .timeline-event-thumbnail {
+        box-shadow: inset 40em 0 0 0 map.get($color, func);;
+      }
+
+      .icon-square {
+        transform: rotate(-45deg);
+        transition: transform 0.2s ease-in;
+      }
+
+      .icon-circle {
+        transform: scale(1.2);
+        transition: transform 0.2s ease-in;
+      }
+
+      @keyframes circle {
+        from {
+          box-shadow: 0 0 0 0px rgba(map.get($color, active), 1);
+        }
+        to {
+          box-shadow: 0 0 0 6px rgba(map.get($color, active), 0);
+        }
+      }
+    }
+    &:last-of-type {
+      &::after {
+        border-radius: 1.5px;
+      }
+    }
+    span {
+      transition-duration: .3s;
+    }
+  }
+}
+
+.timeline-event-icon {
+    @include size($node-size, $node-size);
+    background-color: map.get($color, reverse);
+    border: $line-width solid map.get($color, sub);
+    display: block;
+    left: -#{calc($node-size/2)};
+    position: absolute;
+    z-index: 2;
+    cursor: pointer;
+}
+
+
+.timeline-event-thumbnail {
+    transition: box-shadow 0.5s ease-in 0.1s;
+    color: map.get($color, reverse);
+    background-color: map.get($color, sub);
+    box-shadow: inset 0 0 0 0em #ef795a;
+    display: inline-block;
+    padding: 0.25em 1em 0.2em 1em;
+}
+  
+.icon-square {
+    transform: rotate(45deg);
+}
+
+.icon-circle {
+    border-radius:50%;
+}
+
+// make the current li:before element and the element after that to have sub color
+.timeline ul li:hover::before,
+.timeline ul li:hover ~ li::before,
+.timeline ul li.active-event::before,
+.timeline ul li.active-event ~ li::before{
+  content: '';
+  background: map.get($color, sub);
+  width: $line-width;
+  position: absolute;
+  left: calc($line-width/2);
+  top: calc($node-size/2 + $li-padding-top + $line-width/2);
+  height: calc(100% - $li-padding-top + $node-size/2 - $line-width/2);
+  display: block;
+}
+
+.timeline ul li:hover ~ li:last-child::before,
+.timeline ul li:last-child:hover::before,
+.timeline ul li.active-event ~ li:last-child::before,
+.timeline ul li.active-event:last-child:hover::before {
+  height: calc(100% - $li-padding-top - $node-size/2 - $line-width/2);
+}
+
+// upon hover, make all ul:before line func color
+.timeline ul:hover::before,
+.timeline.timeline-active ul::before {
+  background: map.get($color, func);
+}
+
+.timeline ul:hover li:not(:hover) .timeline-event-icon,
+.timeline.timeline-active ul li:not(.active-event) .timeline-event-icon{
+  border-color: map.get($color, func);
+}
+
+.timeline ul:hover li:hover .timeline-event-icon,
+.timeline.timeline-active ul li.active-event .timeline-event-icon {
+  border-color: map.get($color, active);
+}
+
+.timeline ul:hover li:hover ~ li .timeline-event-icon,
+.timeline.timeline-active ul li.active-event ~ li .timeline-event-icon{
+  border-color: map.get($color, sub);
+}
+
+.timeline-staggered li:nth-child(even) {
+  position: relative;
+  margin-left: 0;
+  width: calc(50% - $node-size)
+}
+
+
+.timeline-staggered li:nth-child(odd) {
+  margin-left: calc(50% + 1em) !important;
+}
+
+.timeline-staggered ul::before {
+  left: calc(50% + 1em);
+}
+
+.timeline-staggered li:nth-child(even) .timeline-event-icon {
+  left: calc(100% - $node-size/2)
+}
+
+.timeline-staggered li:nth-child(even):hover::before,
+.timeline-staggered li:nth-child(even).active-event::before {
+  left: calc(100% + $line-width/2)
+}
+
+.timeline-staggered li:nth-child(even) {
+  padding-left: 0;
+  padding-right: 2em;
+}
+
+.timeline-staggered ul li:hover ~ li:nth-child(even)::before,
+.timeline-staggered.timeline-active ul li.active-event ~ li:nth-child(even)::before {
+  left: calc(100% + $line-width/2);
+}
+
+.timeline li.hide-timeline{
+  display: none;
+}
+
+@media screen and (min-width: 768px) {
+  .timeline-horz ul::before,
+  .timeline-horz ul li:hover ~ li::before,
+  .timeline-horz ul li:hover::before,
+  .timeline-horz.timeline-active ul li.active-event ~ li::before,
+  .timeline-horz.timeline-active ul li.active-event::before{
+    height: $line-width;
+    right: 1em;
+    margin: 0 auto;
+    top: calc($node-size/2 + $line-width/2 + $ul-padding);
+  }
+
+  .timeline-horz ul::before {
+    width: calc(100% - $shift-ul-line);
+    height: $line-width;
+  }
+
+  .timeline-horz ul li:hover ~ li::before,
+  .timeline-horz ul li:hover::before,
+  .timeline-horz.timeline-active ul li.active-event::before,
+  .timeline-horz.timeline-active ul li.active-event ~ li::before {
+    width: calc(100% + $shift-ul-line);
+    height: $line-width;
+  }
+
+  .timeline-horz ul li:hover ~ li:last-child::before,
+  .timeline-horz.timeline-active ul li.active-event ~ li:last-child::before,
+  .timeline-horz ul li:last-child::before {
+    width: 100%;
+    height: $line-width !important;
+  }
+
+  .timeline-horz ul {
+    display: flex;
+    flex-direction: row;
+    width: calc(100% - $node-size);
+
+    &.rendering {
+      @keyframes fadeIn {
+        from {opacity: 0}
+        to {opacity: 1}
+      }
+
+      & > li {
+        animation: fadeIn .5s linear forwards;
+      }
+      
+      &::before {
+        animation: ripple .5s linear forwards;
+        transform-origin: 0% 50%;
+      }
+    }
+
+    li {
+
+      flex: 1;
+
+      .timeline-event-icon ~ * {
+        top: .4em;
+      }
+
+      &:hover ~ li::before,
+      &.active-event ~ li::before{
+        top: calc($node-size/2 + $line-width/2 + $ul-padding);
+      }
+
+      .timeline-event-icon {
+        top: $ul-padding;
+      }
+
+      &:nth-child(odd) {
+        .timeline-event-icon {
+          left: .2em;
+        }
+      }
+
+      small {
+        padding-bottom: 1em;
+      }
+    }
+  }
+
+  .timeline-horz li .timeline-event-icon ~ * {
+    margin-top: 2em;
+    position: relative;
+    left: calc(-2em + $line-width/2); 
+  }
+
+  .timeline-horz.timeline-staggered ul::before {
+    left: $shift-ul-line;
+  }
+
+  .timeline-horz.timeline-staggered li:nth-child(odd) {
+    margin-left: 0 !important;
+    height: 50%;
+
+    .timeline-event-icon ~ .timeline-event-thumbnail {
+      margin-top: 0;
+    }
+  }
+
+  .timeline-horz.timeline-staggered ul li:last-child::before {
+    width: calc(100% - $shift-ul-line);
+    height: $line-width;
+  }
+
+  .timeline-horz.timeline-staggered li:nth-child(odd):hover::before,
+  .timeline-horz.timeline-staggered li:nth-child(odd).active-event::before,
+  .timeline-horz.timeline-staggered li:hover ~ li::before,
+  .timeline-horz.timeline-staggered.timeline-active ul li.active-event ~ li::before {
+    top: 100%;
+  }
+
+  .timeline-horz.timeline-staggered li:nth-child(even) {
+    width: initial;
+    padding-left: 2em;
+    top: 50%;
+    height: 50%;
+
+    .timeline-event-icon {
+      left: 0;
+      top: -#{calc($node-size/2 + $line-width/2)};
+    }
+
+    &:hover::before,
+    &.active-event::before {
+      left: $shift-ul-line;
+      top: 0;
+    }
+  }
+
+  .timeline-staggered.timeline-horz ul li:hover ~ li:nth-child(even)::before,
+  .timeline-staggered.timeline-horz.timeline-active ul li.active-event ~ li:nth-child(even)::before {
+    left: 0;
+    top: 0;
+    height: $line-width;
+  }
+
+  .timeline-staggered.timeline-horz ul::before {
+    top: 50%;
+  }
+
+  .timeline-staggered.timeline-horz li:nth-child(odd) .timeline-event-icon {
+    top: calc(100% - $node-size/2 - $line-width/2)
+  }
+
+  .timeline-staggered.timeline-horz ul {
+    height: 500px; // placeholder only, use javascript for calculating the height
+
+    li {
+      padding-bottom: 0;
+      padding-top: 0;
+    }
+
+    .timeline-event-icon ~ * {
+      top : 0;
+    }
+  }
+
+  .timeline-horz.center-events {
+    ul::before {
+      left: 0;
+      width: 100%;
+    }
+
+    li {
+      text-align: center;
+      padding: 0 1em !important;
+      margin-left: 0;
+
+      &:hover::before,
+      &:hover ~ li::before,
+      &.active-event::before,
+      &.active-event ~ li::before {
+        left: calc(50% + 1em) !important;
+        width: calc(100% + 1em + 1em);
+      }
+
+
+      .timeline-event-icon {
+        left: 50% !important;
+  
+        ~ * {
+          left: auto;
+        }
+      }
+    }
+
+  }
+}

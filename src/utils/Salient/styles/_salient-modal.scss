@@ -1,0 +1,242 @@
+// Mixin for transition/transform
+@mixin translate($x, $y) {
+    -webkit-transform: translate($x, $y);
+        -ms-transform: translate($x, $y); // IE9+
+            transform: translate($x, $y);
+  }
+
+@mixin transition($transition) {
+    -webkit-transition: $transition;
+            transition: $transition;
+  }
+
+@mixin transition-transform($transition) {
+    -webkit-transition: -webkit-transform $transition;
+       -moz-transition: -moz-transform $transition;
+         -o-transition: -o-transform $transition;
+            transition: transform $transition;
+  }
+
+@keyframes slide-down {
+    from {
+        opacity: 0;
+        transform: translateY(-3rem);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal {
+    position: static;
+    //display: none;
+    &:before {
+        content: "";
+        background: rgba(0, 0, 0, 0.6);
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 10;
+    }
+}
+
+.modal-content {
+    width: 735px;
+    top: 20%;
+    box-sizing: border-box;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    position: absolute;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+    border: 1px solid #eaeaea;
+    background-color: #fff;
+    z-index: 11;
+    animation: slide-down 300ms ease-out forwards;
+}
+
+.modal-close {
+    width: 20px;
+    cursor: pointer;
+    display: inline-block;
+    border: none;
+    background: transparent;
+    vertical-align: middle;
+    text-decoration: none;
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    z-index: 2;
+
+    &::after, &::before {
+        border-radius: 3px;
+        content: "";
+        display: block;
+        height: 2px;
+        margin: 8px 0;
+        transition: all 0.2s ease-in-out;
+        background: #333;
+        opacity: .4;
+    }
+
+    &:hover::after,
+    &:hover::before{
+        opacity: 1;
+    }
+
+    &::before {
+        transform: translateY(5px) rotate(135deg);
+    }
+
+    &::after {
+        transform: translateY(-5px) rotate(-135deg);
+    }
+}
+
+.modal-header, .modal-body {
+    padding: 10px;
+    display: block;
+}
+
+.modal-header {
+    border-bottom: 1px solid #eee;
+    font-weight: 700;
+    font-size: 1.2em;
+}
+
+.modal-body {
+    position: relative;
+    min-height: 150px;
+    section {
+        max-width: 0;
+        max-height:0;
+        display: block;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        width: 100%;
+        visibility: hidden;
+        position: relative;
+        pointer-events: none;
+    }
+
+    section.fit-content {
+        width: 80%;
+    }
+
+    section.center-content {
+        text-align: center;
+    }
+
+    section.active {
+        max-width: 100%;
+        max-height: 100%;
+        visibility: visible;
+        pointer-events: all;
+
+    }
+}
+
+.modal-footer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 10px auto;
+    width: 100%;
+}
+
+.modal-indicators {
+    width: 60%;
+    padding-left: 0;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+    list-style: none;
+}
+
+.modal.light-theme .modal-indicators {
+    li {
+        border-color: #333;
+    }
+
+    .active {
+        background-color: #333;
+    };
+}
+
+.modal-indicators li {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    margin: 2px;
+    text-indent: -999px;
+    cursor: pointer;
+    background-color: #000 \9;
+    background-color: rgba(0, 0, 0, 0);
+    border: 1px solid #fff;
+    border-radius: 100%;
+}
+
+.modal-indicators .active {
+    background-color: #fff;
+}
+
+.modal-control {
+    position: absolute;
+    top: 50%;
+    width: 40px;
+    height: 40px;
+    margin-top: -20px;
+    font-size: 60px;
+    line-height: 30px;
+    background: rgba(0, 0, 0, 0.8);   
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    border-radius: 100%;
+    opacity: .4;
+
+    &.right-arrow {
+        right: 15px;
+        left: auto;
+    }
+
+    &.left-arrow {
+        right: auto;
+        left: 15px;
+    }
+
+    &::after {
+        content: '';
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        border-top: 2px solid #fff;
+        border-right: 2px solid #fff;
+        top: 50%;
+        left: 50%;
+    }
+
+    &:hover {
+        cursor: pointer;
+        opacity: .7;
+    }
+}
+
+.modal-control.right-arrow::after {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.modal-control.left-arrow::after {
+    transform: translate(-50%, -50%) rotate(225deg);
+}
+
+@media screen and (max-width: 768px){
+    .modal-content {
+        width: 90%;
+    }
+}

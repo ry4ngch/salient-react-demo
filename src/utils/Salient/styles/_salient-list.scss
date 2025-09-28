@@ -1,0 +1,27 @@
+.list-group {
+    width: 100%;  
+    transition: all 0.3s ease-in-out;
+    list-style: none;
+    outline: 1px solid rgba(160, 160, 160, 0.2);
+
+    ul {
+       background-color: #fff;
+       border-radius: 5px;
+       position: relative;
+    }
+
+    .list-item {
+        border-bottom: 1px solid #eee;
+        padding: 15px;
+        margin: auto;
+        transition: all 0.4s ease-in-out;
+
+        &:last-child {
+            border-bottom: none;
+        }
+
+        &.list-highlight:hover {
+            box-shadow: 0 0 20px rgba(0,0,0,0.2);
+        }
+    }
+}

@@ -1,0 +1,282 @@
+/*
+SCSS variables and mixins
+*/
+$color__main: #444;
+$background__active: #eee;
+$background__hover: #d4d4d4;
+$background__main: rgb(245 245 244);
+$text__hover: #525151;
+$border__color: #ddd;
+$width__tabs-side: 150px;
+$breakpoint: 768px;
+$tab-link__side-padding: 1em;
+$tab-link__vert-padding: 2em;
+@mixin tab-active($active-type: 'box') {
+
+    @if $active-type == 'underline' {
+        background-color: #00000020;
+        color: $color__main;
+        font-weight: bold;
+    } @else {
+        background: $color__main;
+        color: $background__active;
+    }
+
+}
+
+.tabbed-content {
+    background: #fff;
+    box-shadow: 1px 1px 6px #ccc;
+    padding: 1em;
+    //margin: 1em auto;  
+}
+
+.tab-content-wrapper {
+    transition: all 0.45s ease-in-out;
+    overflow-y: hidden;
+    background: $background__main;
+    position: relative;
+    min-height: 120px;
+}
+
+.tabs {
+    position: relative;
+
+    ul {
+        //margin: 0 0 1em 0;
+        padding: 0;
+        background: $background__main;
+
+        /*li, a {
+            border-radius: .8em;
+        }*/
+
+        li {
+
+            &:hover {
+                cursor: pointer;
+            }
+            
+            a {
+                padding: $tab-link__side-padding $tab-link__vert-padding;
+                margin-right: .3em;
+                text-decoration: none;
+                color: $color__main;
+                transition: all 0.3s ease-in-out;
+                background-color: $background__main;
+
+                &:hover {
+                    background-color: $background__hover;
+                    color: $text__hover;
+                }
+                &.active {
+                    @include tab-active();
+                }
+            }
+        } 
+    }
+
+    &.tabs-underline {
+        li {
+            a {
+                position: relative;
+                &::after {
+                    width: 100%;
+                    content: "";
+                    position: absolute;
+                    left: 0;
+                    bottom: 0;
+                    height: 2px;
+                    display: block;
+                    transform: scale(0);
+                    transition: transform .5s ease;
+                    background: $color__main;
+                }
+                &.active {
+                    @include tab-active('underline');
+
+                    &::after {
+                        transform: scale(1);
+                    }
+                }
+            }
+        }
+    }
+}
+
+.item {
+    margin-bottom: 2px;
+    //background: $background__main;
+
+    &::before {
+        cursor: pointer;
+        background: $background__active;
+        padding: .5em;
+        display: block;
+        opacity: 0;
+    }
+
+    &.active {
+
+        &::before {
+            @include tab-active();
+        }
+
+        .item-content {
+            padding: 1em;
+            -webkit-transition: opacity 0.3s ease-in-out;
+            -moz-transition: opacity 0.3s ease-in-out;
+            -o-transition: opacity 0.3s ease-in-out;
+            -ms-transition: opacity 0.3s ease-in-out;
+            transition: opacity 0.3s ease-in-out;
+        }
+    }
+}
+
+
+.tabbed-content {
+
+    .tabs {
+        display: none;
+    }
+
+    .item {
+        min-height: 2em; // We need a minimum height for each item or else the accordion buttons would dissapear
+
+        &::before {
+            content: attr(data-title); // Instead of polluting the HTML with a duplicate set of tabs, we get the accordion using the data-title attribute.
+            opacity: 1;
+
+            
+        }
+        &:not(.active):hover::before {
+            background: $background__hover;
+            color: $text__hover;
+        }
+
+        .item-content { // We hide the inactive content with zero opacity instead of "display:none" because this allows us to apply transition effects if we want. 
+            opacity: 0;
+            visibility: hidden;
+            max-height: 0;
+        }
+
+        &.active {
+            .item-content {
+                opacity: 1;
+                visibility: visible;
+                max-height:20em;
+            }
+        }
+
+    }  
+}
+
+// Adjust the transition effect for accordian which only display on small screen
+@media all and (max-width: $breakpoint){
+    .tabbed-content {
+        .item {
+            .item-content {
+                transition: max-height .45s linear, opacity .45s linear;
+            }
+        }
+    }
+}
+
+
+// Tabs for larger screens
+@media all and (min-width: $breakpoint) {
+    .tabbed-content {
+        .tabs {
+            display: block;
+            border-bottom: 1px solid $border__color;
+            li {
+                display: inline-block;
+
+                a {
+                    display: block;
+                }
+            }
+        }
+
+        .item {
+            min-height: 0;
+            transform: translateY(-100%);
+            opacity: 0;
+            transition: transform .45s ease-in-out, opacity 2s ease;
+
+            &.active {
+                transform: translate(0);
+                opacity: 1;
+            }
+            &::before {
+                display: none;
+            }
+        }
+        
+
+        // Tabs on the side (works only on big screens)
+        &.tabs-side {
+            display: flex;
+            flex-direction: row;
+            &::after {
+                clear: both;
+                display:table;
+                content: '';
+            }
+
+            .tab-content-wrapper {
+                margin-left: 1em;
+            }
+            
+            .tabs {
+                width: 100%;
+                //float: left;
+                border-right: 1px solid $border__color;
+                padding-right: 1em;
+                padding-bottom: none;
+                border-bottom: none;
+
+                li {
+                    display: block;
+                    margin-bottom: 2px;
+
+                    a {
+                        padding: 1em;
+                        margin-right: 0;
+                    }
+                }
+
+                ul {
+                    padding: 1em;
+                    margin-bottom: 0;
+                    border-radius: 1em;
+                }
+
+                &.tabs-underline {
+                    li {
+                        a {
+                            position: relative;
+                            &::after {
+                                position: absolute;
+                                height: 100%;
+                                left: 0;
+                                top: 0;
+                                bottom: 0;
+                                width: 2px;
+                                transform: scale(0);
+                                transition: transform .5s ease;
+                            }
+                            &.active {
+                                @include tab-active('underline');
+
+                                &::after {
+                                    transform: scale(1);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }  
+    }
+}

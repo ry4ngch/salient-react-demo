@@ -1,0 +1,100 @@
+// Adapted from: https://codepen.io/cbolson/pen/gOVrZpz
+// Minor modification with animation and caret
+.bg-dark .list-tree {
+    --tree-clr: whitesmoke;
+    span:not(.comment):hover {
+        color: hsl(223, 14%, 20%);
+    }
+}
+
+.list-tree {
+    --tree-clr: #222;
+    --tree-font-size: 1.4rem;
+    --tree-item-height: 2;
+    --tree-offset: 1.5rem;
+    --tree-thickness: 2px;
+    --tree-style: solid;
+}
+.list-tree ul{
+    display: grid;
+    list-style: none;
+    font-size: var(--tree-font-size);
+    transform-origin: top;
+    transform: scaleY(1);
+    opacity: 1;
+    max-height: 1000px;
+    overflow: hidden;
+    transition: transform .3s ease-in-out, opacity 0.3s ease-in-out, max-height 0.3s ease-in-out;
+    
+    &.hide {
+        transform: scaleY(0);
+        opacity: 0;
+        max-height: 0;
+    }
+}
+.list-tree li{
+    line-height: var(--tree-item-height);
+    padding-inline-start: var(--tree-offset);
+    border-left: var(--tree-thickness) var(--tree-style) var(--tree-clr);
+    position: relative;
+    text-indent: .5rem;
+    
+    &:last-child {
+        border-color: transparent; /* hide (not remove!) border on last li element*/
+    }
+    & .comment{
+        font-size: 1.2rem;
+        font-style: italic;
+        font-weight: 100;
+        opacity: .65;
+        margin-left: .8rem;
+    
+    }
+
+    & span:not(.comment) {
+        border: 1px solid #999;
+        border-radius: 5px;
+        padding: 3px 8px;
+        margin-left: 10px;
+
+        &:hover {
+            background: #eee;
+            cursor: pointer;
+        }
+
+        &[title]:after {
+            content: '\25BC';
+            margin-left: .5rem;
+        }
+    }
+
+    &::before{
+        content: '';
+        position: absolute;
+        top: calc(var(--tree-item-height) / 2 * -1 * var(--tree-font-size) + var(--tree-thickness));
+        left: calc(var(--tree-thickness) * -1); 
+        width: calc(var(--tree-offset) + var(--tree-thickness) * 2);
+        height: calc(var(--tree-item-height)  * var(--tree-font-size));
+        border-left: var(--tree-thickness) var(--tree-style) var(--tree-clr);
+        border-bottom: var(--tree-thickness) var(--tree-style) var(--tree-clr);
+    }
+    &::after{
+        content: '';
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background-color: var(--tree-clr);
+        top: calc(var(--tree-item-height) / 2 * var(--tree-font-size) + 2px);
+        left: var(--tree-offset) ;
+        translate: calc(var(--tree-thickness) * -1) calc(var(--tree-thickness) * -1);
+    }
+    & li li{
+        /*
+        change line color etc.
+        --tree-clr: rgb(175, 208, 84);
+        */
+        --tree-style: dotted;
+        border-color: transparent;
+    }
+}

@@ -1,0 +1,20 @@
+hr {
+  margin: 5px 0;
+}
+
+#page-wrapper {
+    height: 100%;
+    padding: 5px 15px;
+    // overflow-x: hidden;
+    // overflow-y: auto;
+    margin-bottom: 42px;
+}
+
+/* Edit Below to Customize Widths > 768px */
+@media (min-width:768px) {
+  #page-wrapper {
+	padding: 0px 25px 15px 25px;
+  }
+}
+
+  

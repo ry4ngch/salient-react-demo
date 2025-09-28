@@ -1,0 +1,88 @@
+.badge {
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 8px;
+    font-size: 12px;
+}
+
+.badge.has-indicator:before {
+    content: "";
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    margin-right: 4px;
+}
+
+
+.badge.active {
+    color: #2ba972;
+    background-color: rgba(43, 169, 114, 0.2);
+}
+
+.badge.active:before {
+    background-color: #2ba972;
+}
+
+.badge.disabled {
+    color: #59719d;
+    background-color: rgba(89, 113, 157, 0.2);
+}
+
+.badge.disabled:before {
+    background-color: #59719d;
+}
+
+.badge.stall {
+    background-color: #f0e5dc;
+    color: #754c29;
+}
+
+.badge.stall:before {
+    background-color: #754c29;
+}
+
+.badge.awaiting {
+    background-color: #d9edf7;
+    color: #337ab7;
+}
+
+.badge.awaiting:before {
+    background-color: #337ab7;
+}
+
+.badge.pending {
+    color: #616161;
+    background-color: #f5f5f5;
+}
+
+.badge.pending:before {
+    background-color: #616161;
+}
+
+.badge.loading {
+    color: #5628EE;
+    background-color: #ece7fe;
+}
+
+.badge.loading:before {
+    background-color: #5628EE;
+}
+
+.badge.cancel {
+    color: rgba(155, 44, 44);
+    background-color: #fde7ea;
+}
+
+.badge.cancel:before {
+    background-color: rgba(155, 44, 44);
+}
+
+.badge.idle {
+    background-color: #FBF7E7;
+    color: #DAA520;
+}
+
+.badge.idle:before {
+    background-color: #DAA520;
+}

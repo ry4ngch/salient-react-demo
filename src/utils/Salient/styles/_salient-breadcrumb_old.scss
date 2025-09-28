@@ -1,0 +1,170 @@
+//default
+.breadcrumb {
+	display: inline-block;
+	box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.35);
+	overflow: hidden;
+	border-radius: 5px;
+	counter-reset: flag; 
+}
+
+.breadcrumb a {
+	text-decoration: none;
+	outline: none;
+	display: block;
+	float: left;
+	font-size: 12px;
+	line-height: 36px;
+	color: white;
+	padding: 0 20px 0 40px;
+	background: #666;
+	background: linear-gradient(#666, #333);
+	position: relative;
+
+	&:after {
+		content: '';
+		position: absolute;
+		top: 0; 
+		right: -18px;
+		width: 36px; 
+		height: 36px;
+		transform: scale(0.707) rotate(45deg);
+		z-index: 1;
+		background: #666;
+		background: linear-gradient(135deg, #666, #333);
+		box-shadow: 
+			1px -1px 0 1px rgba(0, 0, 0, 0.4), 
+			2px -2px 0 2px rgba(255, 255, 255, 0.1);
+		border-radius: 0 5px 0 50px;
+	}
+
+	&:first-child {
+		border-radius: 5px 0 0 5px;
+		padding: 0 20px 0 30px;
+	}
+
+	&:last-child {
+		border-radius: 0 5px 5px 0;
+		padding-right: 20px;
+
+		&:after {
+			content: none;
+		}
+	}
+
+	&.active, &:hover{
+		background: #333;
+		background: linear-gradient(#333, #000);
+	}
+
+	&.active:after, &:hover:after {
+		background: #333;
+		background: linear-gradient(135deg, #333, #000);
+	}
+}
+
+.breadcrumb.badge a {
+	padding: 0 10px 0 60px;
+
+	&:first-child{
+		padding-left: 46px;
+	}
+
+	&:first-child:before {
+		left: 14px;
+	}
+
+	&:before {
+		content: counter(flag);
+		counter-increment: flag;
+		border-radius: 100%;
+		width: 20px;
+		height: 20px;
+		line-height: 20px;
+		margin: 8px 0;
+		position: absolute;
+		top: 0;
+		left: 30px;
+		background: #444;
+		background: linear-gradient(#444, #333);
+		font-weight: bold;
+		text-align: center;
+	}
+}
+
+// light blue background
+.breadcrumb.light-bc a:after {
+	box-shadow: 
+		1px -1px 0 1px rgba(41, 98, 255, 0.2), 
+		2px -2px 0 1px rgba(255, 255, 255, 0.1);
+}
+
+.light-bc a, .light-bc a:after {
+	background: white;
+	color: black;
+	transition: all 0.5s;
+}
+.badge.light-bc a:before {
+	background: rgb(41, 98, 255);
+	color: #fff;
+	box-shadow: 0 0 0 1px #ccc;
+}
+.light-bc a:hover, .light-bc a.active, 
+.light-bc a:hover:after, .light-bc a.active:after{
+	background: #e6eef9;
+	color: rgb(41, 98, 255);
+}
+
+// transparent background
+.transparent-bc a, .transparent-bc a:after {
+	background: transparent;
+	color: #4a5568;
+	transition: all 0.5s;
+	opacity: 0.8;
+}
+
+.badge.transparent-bc a:before {
+	background: #494d59;;
+	color: white;
+	box-shadow: 0 0 0 1px #ccc;
+}
+
+.transparent-bc a:hover, .transparent-bc a.active, 
+.transparent-bc a:hover:after, .transparent-bc a.active:after{
+	background: transparent;
+	color: black;
+	opacity: 1;
+}
+
+// flat background
+.breadcrumb.flat-bc {
+	box-shadow: none;
+
+	a, a:after {
+		background: transparent;
+		color: black;
+		transition: all 0.5s;
+	}
+	
+	a:after {
+		box-shadow: 1px -1px 0 1px rgba(0, 0, 0, 0.1), 
+					2px -2px 0 2px rgba(255, 255, 255, 0.2);
+	}
+
+	a:hover, a.active, 
+	a:hover:after, a.active:after{
+		background: transparent;
+		color: rgb(41, 98, 255);
+	}
+}
+
+.badge.flat-bc a:before {
+	background: rgb(41, 98, 255);
+	color: #fff;
+	box-shadow: 0 0 0 1px #ccc;
+}
+
+.center-bc {
+	position: relative;
+	transform: translateX(-50%);
+	left: 50%;
+}
