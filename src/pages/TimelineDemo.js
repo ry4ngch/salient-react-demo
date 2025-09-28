@@ -15,7 +15,7 @@ const TimelineDemo = () => {
 
 
   useEffect(() => {
-    axios.get('http://localhost:8080/assets/timeline_data.json')
+    axios.get('/assets/timeline_data.json')
       .then((response) => {
         setData(response.data.data || []);
         setIsLoading(false);
