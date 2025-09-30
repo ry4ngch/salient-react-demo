@@ -30,6 +30,9 @@ import ModalDemo from './pages/ModalDemo';
 import BadgesDemo from './pages/BadgesDemo';
 import BannersDemo from './pages/BannersDemo';
 
+// import Navigate Provider context
+import { AppProvider } from './store/navigate-context';
+
 // import jQuery
 import 'jquery';
 
@@ -105,9 +108,17 @@ const router = createBrowserRouter([
 
 class App extends Component {
     render(){
+
 		console.log('jQuery version', $.fn.jquery);
-		return <RouterProvider router={router}/>
+		return (
+			<RouterProvider router={router}/>
+		)
+		
     }
 }
 
-root.render(<App/>);
+root.render(
+	<AppProvider>
+		<App/>
+	</AppProvider>
+);

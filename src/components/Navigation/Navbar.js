@@ -1,9 +1,11 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import Nav, {NavMenu} from '../../utils/Salient/UI/Navigation/Nav';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
+import NavigateContext from '../../store/navigate-context';
 
 const Navbar = () => {
+    const ctx = useContext(NavigateContext);
     return (
         <Nav title="Salient" className="grayscale-scheme" shift={true} navSlideDown={false} brandLogo={<FontAwesomeIcon icon="circle-notch" size="2x" className="brand-icon"></FontAwesomeIcon>}>
             <NavMenu>
@@ -19,17 +21,9 @@ const Navbar = () => {
                         <span className="navlink-text">Features</span>
                     </a>
                     <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <li><Link className="dropdown-item" to="/tables">Tables</Link></li>
-                        <li><Link className="dropdown-item" to="/accordian">Accordian</Link></li>
-                        <li><Link className="dropdown-item" to="/tabs">Tabs</Link></li>
-                        <li><Link className="dropdown-item" to="/buttons">Buttons</Link></li>
-                        <li><Link className="dropdown-item" to="/breadcrumbs">Breadcrumbs</Link></li>
-                        <li><Link className="dropdown-item" to="/modal">Modal</Link></li>
-                        <li><Link className="dropdown-item" to="/cards">Card</Link></li>
-                        <li><Link className="dropdown-item" to="/treeview">Treeview</Link></li>
-                        <li><Link className="dropdown-item" to="/timeline">Timeline</Link></li>
-                        <li><Link className="dropdown-item" to="/badges">Badges</Link></li>
-                        <li><Link className="dropdown-item" to="/banners">Banners</Link></li>
+                        {ctx.pageLinks.map((page, index) => (
+                             <li key={index}><Link className="dropdown-item" to={page.link}>{page.name}</Link></li>
+                        ))}
                     </ul>
                 </li>
                 <li data-tooltip="Dropdown" data-dropdown>

@@ -1,28 +1,42 @@
-import React from "react";
+import React, {useState} from "react";
 import classNames from "classnames";
 
 const Banner = ({icon, className, theme, children, markdownStyle, onBannerDismiss, ...rest}) => {
     const bannerStyle = classNames('banner', {
             ['banner--'+theme]: theme,
             'banner--markdown': markdownStyle
-        })
+        }
+    )
+
+    const [dismissBanner, setDismissBanner] = useState(false);
+
+    const onCloseBanner = () => {
+        if(onBannerDismiss){
+            onBannerDismiss();
+        }
+        setDismissBanner(true);
+    }
     
     return (
-        <div className={[bannerStyle, className || ''].join(' ').trim()} {...rest}>
-            <div className="banner__inner">
-                {
-                    icon && 
-                    <span className="banner__icon">
-                        {icon}
-                    </span>
-                }
-                <span className='banner__body'>
-                    {children}
-                </span>
-                
-            </div>
-            <button className="banner__dismiss" title="Close this banner" aria-label="Close this banner" onClick={onBannerDismiss}></button>
-        </div>
+        <React.Fragment>
+            {!dismissBanner && 
+                (<div className={[bannerStyle, className || ''].join(' ').trim()} {...rest}>
+                    <div className="banner__inner">
+                        {
+                            icon && 
+                            <span className="banner__icon">
+                                {icon}
+                            </span>
+                        }
+                        <span className='banner__body'>
+                            {children}
+                        </span>
+                        
+                    </div>
+                    <button className="banner__dismiss" title="Close this banner" aria-label="Close this banner" onClick={onCloseBanner}></button>
+                </div>)
+            }
+        </React.Fragment>
     )
 }
 
