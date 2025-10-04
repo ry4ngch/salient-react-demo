@@ -1,10 +1,10 @@
 import React, {useState} from "react";
 import classNames from "classnames";
 
-const Banner = ({icon, className, theme, children, markdownStyle, onBannerDismiss, ...rest}) => {
+const Banner = ({icon, className, theme, children, blockquoteStyle, onBannerDismiss, allowBannerDismiss = true, ...rest}) => {
     const bannerStyle = classNames('banner', {
             ['banner--'+theme]: theme,
-            'banner--markdown': markdownStyle
+            'banner--blockquote': blockquoteStyle
         }
     )
 
@@ -33,7 +33,9 @@ const Banner = ({icon, className, theme, children, markdownStyle, onBannerDismis
                         </span>
                         
                     </div>
-                    <button className="banner__dismiss" title="Close this banner" aria-label="Close this banner" onClick={onCloseBanner}></button>
+                    {allowBannerDismiss && 
+                        <button className="banner__dismiss" title="Close this banner" aria-label="Close this banner" onClick={onCloseBanner}></button>
+                    }
                 </div>)
             }
         </React.Fragment>

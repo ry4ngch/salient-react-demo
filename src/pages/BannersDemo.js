@@ -8,18 +8,18 @@ const BannersDemo = () => {
 
     return (
         <React.Fragment>
-            <Banner theme="disabled" markdownStyle={true} onBannerDismiss={() => {alert('Additional Action trigger on closed')}}>
+            <Banner theme="disabled" blockquoteStyle={true} onBannerDismiss={() => {alert('Additional Action trigger on closed')}}>
                 <BannerContent>
-                    The message text to be displayed with some longer content for testing use cases. Please do not make the content this long. 
+                    This is a typical banners with blockquote styling and the current one uses the <em style={{fontWeight: 'bold'}}>disabled</em> theme.
                 </BannerContent>
                 <BannerActions>
                     <BannerAction onClick={someActions}>Some Action</BannerAction>
                 </BannerActions>
             </Banner>
 
-            <Banner theme="active" markdownStyle={true}>
+            <Banner theme="active" blockquoteStyle={true} allowBannerDismiss={false}>
                 <BannerContent>
-                    The message text to be displayed with some longer content for testing use cases. Please do not make the content this long. 
+                    This banner is a blockquote style banner that cannot be dismiss. This is set by the allowBannerDismiss props. The banner uses the <em style={{fontWeight: 'bold'}}>active</em> theme.
                 </BannerContent>
                 <BannerActions>
                     <BannerAction onClick={someActions}>Action One</BannerAction>
@@ -27,9 +27,9 @@ const BannersDemo = () => {
                 </BannerActions>
             </Banner>
 
-            <Banner theme="cancel" markdownStyle={true}>
+            <Banner theme="cancel" blockquoteStyle={true}>
                 <BannerContent>
-                    The message text to be displayed with some longer content for testing use cases. Please do not make the content this long. 
+                    This is a typical banners with blockquote styling using the <em style={{fontWeight: 'bold'}}>cancel</em> theme but with multiple actions.
                 </BannerContent>
                 <BannerActions>
                     <BannerAction onClick={someActions}>Action One</BannerAction>
@@ -37,9 +37,9 @@ const BannersDemo = () => {
                 </BannerActions>
             </Banner>
 
-            <Banner markdownStyle={true}>
+            <Banner blockquoteStyle={true}>
                 <BannerContent>
-                    The message text to be displayed with some longer content for testing use cases. Please do not make the content this long. 
+                    This is a another typical banners with blockquote styling using the <em style={{fontWeight: 'bold'}}>default</em> theme but with multiple actions.
                 </BannerContent>
                 <BannerActions>
                     <BannerAction onClick={someActions}>Action 1</BannerAction>
@@ -47,36 +47,36 @@ const BannersDemo = () => {
                 </BannerActions>
             </Banner>
 
-            <Banner theme="teal" markdownStyle={false}>
+            <Banner theme="teal" blockquoteStyle={false}>
                 <BannerContent>
-                    The message text to be displayed with some longer content for testing use cases. Please do not make the content this long. 
+                    This is a normal banner without blockquote styling using the <em style={{fontWeight: 'bold'}}>teal</em> theme
                 </BannerContent>
                 <BannerActions>
                     <BannerAction onClick={someActions}>Some Action</BannerAction>
                 </BannerActions>
             </Banner>
 
-            <Banner theme="purple" markdownStyle={false}>
+            <Banner theme="purple" blockquoteStyle={false}>
                 <BannerContent>
-                    The message text to be displayed with some longer content for testing use cases. Please do not make the content this long. 
+                    This is a normal banner without blockquote styling using the <em style={{fontWeight: 'bold'}}>purple</em> theme
                 </BannerContent>
                 <BannerActions>
                     <BannerAction onClick={someActions}>Some Action</BannerAction>
                 </BannerActions>
             </Banner>
 
-            <Banner theme="warn" markdownStyle={false}>
+            <Banner theme="warn" blockquoteStyle={false}>
                 <BannerContent>
-                    The message text to be displayed with some longer content for testing use cases. Please do not make the content this long. 
+                This is a normal banner without blockquote styling using the <em style={{fontWeight: 'bold'}}>warn</em> theme
                 </BannerContent>
                 <BannerActions>
                     <BannerAction onClick={someActions}>Some Action</BannerAction>
                 </BannerActions>
             </Banner>
 
-            <Banner theme="emergency" markdownStyle={false}>
+            <Banner theme="emergency" blockquoteStyle={false}>
                 <BannerContent>
-                    The message text to be displayed with some longer content for testing use cases. Please do not make the content this long. 
+                    This is a normal banner without blockquote styling using the <em style={{fontWeight: 'bold'}}>emergency</em> theme 
                 </BannerContent>
                 <BannerActions>
                     <BannerAction onClick={someActions}>Some Action</BannerAction>

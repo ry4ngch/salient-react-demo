@@ -7,7 +7,7 @@ import NavigateContext from '../../store/navigate-context';
 const Navbar = () => {
     const ctx = useContext(NavigateContext);
     return (
-        <Nav title="Salient" className="grayscale-scheme" shift={true} navSlideDown={false} brandLogo={<FontAwesomeIcon icon="circle-notch" size="2x" className="brand-icon"></FontAwesomeIcon>}>
+        <Nav title="Salient" theme="blue" shift={true} navSlideDown={false} brandLogo={<FontAwesomeIcon icon="circle-notch" size="2x" className="brand-icon"></FontAwesomeIcon>}>
             <NavMenu>
                 <li data-tooltip="Home">
                     <Link to="/">

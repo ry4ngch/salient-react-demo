@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import classNames from 'classnames';
 
-const Nav = (props) => {
+const Nav = ({shift=true, navSlideDown=false, brandLogo, title, children, theme, ...rest}) => {
   const [isNavCollapsed, setIsNavCollapsed] = useState(true);
   const [isSearchVisible, setIsSearchVisible] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
@@ -52,20 +52,30 @@ const Nav = (props) => {
     setActiveDropdown((prev) => (prev === index ? null : index));
   };
 
+  const navClasses = classNames("navbar", 
+    { 
+      "sd-shift-navbar": shift && !navSlideDown && !isNavCollapsed,
+      [theme+"-scheme"]: theme 
+    }
+  );
+
   return (
     <div>
       <div id="overlay" ref={overlayRef} className={isNavCollapsed ? '' : 'overlay'}></div>
-      <nav className={`${classNames("navbar", { "sd-shift-navbar": props.shift && !props.navSlideDown && !isNavCollapsed })} ${props.className}`} {...(props.shift && !props.navSlideDown ? { 'data-effect': 'shift' } : {})}>
+      <nav 
+        {...rest} 
+        className={`${navClasses} ${rest.className}`.trim()} 
+        {...(shift && !navSlideDown ? { 'data-effect': 'shift' } : {})}>
         <div className={classNames("hamburger", { "active": !isNavCollapsed })} onClick={handleHamburgerClick}>
           <div></div>
         </div>
         <a className="navbar-brand">
-          {props.brandLogo}
-          {props.title && <span>{props.title}</span>}
+          {brandLogo}
+          {title && <span>{title}</span>}
         </a>
-        {React.isValidElement(props.children) ?
-          React.cloneElement(props.children, {
-            navSlideDown: props.navSlideDown,
+        {React.isValidElement(children) ?
+          React.cloneElement(children, {
+            navSlideDown: navSlideDown,
             isNavCollapsed,
             handleDropdownClick,
             activeDropdown,
@@ -73,40 +83,36 @@ const Nav = (props) => {
             isSearchVisible,
             ref: navLinksRef
           })
-          : props.children}
+          : children}
       </nav>
     </div>
   );
 };
 
-Nav.defaultProps = {
-  navSlideDown: false,
-  shift: true
-};
-
-const NavMenu = (props) => {
+// Note: All the props in NavMenu is passed down from Nav
+const NavMenu = ({isNavCollapsed, navSlideDown = false, children, handleDropdownClick, handleSearchToggle, activeDropdown, isSearchVisible, ...rest}) => {
     const navListClasses = classNames(
       'navlinks',
-      { 'nav-collapse': props.isNavCollapsed },
-      { 'sd-slide-in': !props.navSlideDown },
-      { 'sd-slide-down': props.navSlideDown }
+      { 'nav-collapse': isNavCollapsed },
+      { 'sd-slide-in': !navSlideDown },
+      { 'sd-slide-down': navSlideDown }
     );
   
     return (
       <>
-        <ul className={navListClasses} ref={props.ref}>
-          {React.Children.map(props.children, (child, index) => (
+        <ul {...rest} className={navListClasses} ref={rest.ref}>
+          {React.Children.map(children, (child, index) => (
             React.isValidElement(child) && child.props['data-dropdown'] !== undefined ? (
               React.cloneElement(child, {
                 ...child.props,
-                onClick: () => props.handleDropdownClick(index),
+                onClick: () => handleDropdownClick(index),
                 tabIndex: 0,
                 children: React.Children.map(child.props.children, (grandChild) => {
                   if (React.isValidElement(grandChild)) {
                     const isDropdownMenu = grandChild.props.className?.includes('dropdown-menu');
                     return React.cloneElement(grandChild, {
                       ...grandChild.props,
-                      className: [grandChild.props.className, isDropdownMenu && props.activeDropdown === index ? 'active-dropdown' : ''].join(' ').trim()
+                      className: [grandChild.props.className, isDropdownMenu && activeDropdown === index ? 'active-dropdown' : ''].join(' ').trim()
                     });
                   }
                   return grandChild;
@@ -116,21 +122,17 @@ const NavMenu = (props) => {
           ))}
         </ul>
         <div
-          className={classNames('search pos-right', { search: props.isSearchVisible })}
+          className={classNames('search pos-right', { search: isSearchVisible })}
           data-toggle="hide"
-          onClick={props.handleSearchToggle}
+          onClick={handleSearchToggle}
         ></div>
-        <div className={classNames('search-box', { hide: !props.isSearchVisible })}>
+        <div className={classNames('search-box', { hide: !isSearchVisible })}>
           <i className="search"></i>
           <input type="text" placeholder="Search here..." />
         </div>
       </>
     );
   };
-
-NavMenu.defaultProps = {
-  navSlideDown: false
-};
 
 export default Nav;
 export { NavMenu };

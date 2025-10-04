@@ -12,6 +12,7 @@
 
     .list-item {
         border-bottom: 1px solid #eee;
+        //box-shadow: 0 1px 0 0px inset;
         padding: 15px;
         margin: auto;
         transition: all 0.4s ease-in-out;
@@ -22,6 +23,19 @@
 
         &.list-highlight:hover {
             box-shadow: 0 0 20px rgba(0,0,0,0.2);
+        }
+    }
+
+    &.list--dark {
+        background-color: #343a40;
+        color: #fff;
+
+        .list-item {
+            border-color: oklch(0.439 0 0);
+
+            &.list-highlight:hover {
+                box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            }
         }
     }
 }

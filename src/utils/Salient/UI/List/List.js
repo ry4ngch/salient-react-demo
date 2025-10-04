@@ -1,8 +1,12 @@
 import React from "react";
+import classNames from "classnames";
 
-const List = ({children, className, ...rest}) => {
+const List = ({children, className, theme, ...rest}) => {
+    const listClasses = classNames('list-group', {
+        ['list--'+theme]: theme
+    })
     return (
-        <ul className={`list-group ${className || ''}`.trim()} {...rest}>
+        <ul className={`${listClasses} ${className || ''}`.trim()} {...rest}>
            {children}
         </ul>
     )
