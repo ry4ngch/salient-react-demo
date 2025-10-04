@@ -29,6 +29,7 @@ import FormUIsDemo from './pages/FormUIDemo';
 import ModalDemo from './pages/ModalDemo';
 import BadgesDemo from './pages/BadgesDemo';
 import BannersDemo from './pages/BannersDemo';
+import SidebarDemo from './pages/SidebarDemo';
 
 // import Navigate Provider context
 import { AppProvider } from './store/navigate-context';
@@ -100,7 +101,10 @@ const router = createBrowserRouter([
 				path: '/banners',
 				element: <BannersDemo/>
 			},
-			
+			{
+				path: '/sidebar',
+				element: <SidebarDemo/>
+			},
 
 		]
 	}

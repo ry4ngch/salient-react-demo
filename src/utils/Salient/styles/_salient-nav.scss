@@ -39,9 +39,9 @@ $navbar-grayscale-hovercolor: #fff;
     line-height: 1;
 }
 
-.navbar > * {
-    font-size: 1.4rem;
-}
+// .navbar > * {
+//     font-size: 1.4rem;
+// }
 
 /* Hamburger Menu Icon */
 
@@ -540,12 +540,14 @@ nav li[data-dropdown] ul.dropdown-menu.active-dropdown {
         //display: none;
         width: 0;
         visibility: hidden;
+        left: -100%;
     }
 
     .sd-slide-down.nav-collapse {
         height: 0;
         max-height: 0; //added 
         visibility: hidden;
+        top: -100%;
     }
 
     .navbar ul:not(.nav-collapse) li,
@@ -558,7 +560,7 @@ nav li[data-dropdown] ul.dropdown-menu.active-dropdown {
         //opacity: 1;
         transition: 0.2s width ease-in-out;
         pointer-events: auto;
-        width: 45%;
+        width: 60%;
         left: 0;
         box-shadow: 0 4px 10px rgba(0, 0, 0 , 0.2); 
     }
@@ -597,7 +599,7 @@ nav li[data-dropdown] ul.dropdown-menu.active-dropdown {
 
     .sd-shift-navbar {
         transition: .2s left ease-in-out;
-        left: 45%;
+        left: 60%;
     }
 
     .sd-slide-down {
@@ -619,15 +621,15 @@ nav li[data-dropdown] ul.dropdown-menu.active-dropdown {
         top: 50%;
         transform: translateY(-50%);
         width: auto;
-        left: 48%;
-        right: 10%;
+        left: 68%;
+        right: 15%;
     }
 
     .navbar .sd-slide-in.nav-collapse ~ .search-box:not(.hide) {
         top: 50%;
         transform: translateY(-50%);
         width: auto;
-        left: 10%;
+        left: 15%;
     }
 
     .navbar[data-effect="shift"] .sd-slide-in:not(.nav-collapse) ~ .search-box:not(.hide){
@@ -657,7 +659,7 @@ nav li[data-dropdown] ul.dropdown-menu.active-dropdown {
         position: fixed;
         left: 0;
         right: 0;
-        width: 30%;
+        width: 55%;
         height: 35px;
         //top: 35px;
         text-align: center;

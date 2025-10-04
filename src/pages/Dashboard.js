@@ -20,7 +20,7 @@ const Dashboard = () => {
         <Card>
             <CardContent>
                 <PageContent title="Welcome">
-                    <h3>This demo site was created to shows the features of Salient Library capabilities integrated with react-router-dom</h3>
+                    <h3>This demo site was created to showcase the features of Salient Library capabilities integrated with react-router-dom</h3>
                 </PageContent>
             </CardContent>
         

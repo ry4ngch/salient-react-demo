@@ -13,7 +13,8 @@ const NavigateContext = React.createContext({
         {name: 'Treeview', link: '/treeview'},
         {name: 'Timeline', link: '/timeline'},
         {name: 'Badges', link: '/badges'},
-        {name: 'Banners', link: '/banners'}
+        {name: 'Banners', link: '/banners'},
+        {name: 'Sidebar', link: '/sidebar'},
     ],
 })
 

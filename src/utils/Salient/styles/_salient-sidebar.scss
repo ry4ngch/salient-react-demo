@@ -1,0 +1,131 @@
+:root {
+  --sb-primary: rgb(41, 98, 255);
+  --sb-bg-hover: #edeff0;
+  --sb-text: rgba(0, 0, 0, 0.7);
+  --sb-border: rgba(0, 0, 0, 0.2);
+  --sb-pad: 20px;
+}
+
+.sidebar {
+  width: clamp(240px, 50%, 400px);
+  height: 100%;
+  background: #f8f8f8;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  position: relative;
+  overflow-y: auto;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 1px 2px 0 rgba(0, 0, 0, 0.24);
+  border-radius: 0.25rem;
+
+  * {
+    box-sizing: border-box;
+  }
+
+  ul, ul ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+}
+
+/* ========== Expand/Collapse Animations ========== */
+@keyframes expand {
+  from { max-height: 0; opacity: 0; }
+  to { max-height: 999px; opacity: 1; }
+}
+
+@keyframes collapse {
+  from { max-height: 999px; opacity: 1; }
+  to { max-height: 0; opacity: 0; }
+}
+
+.expand {
+  animation: expand .5s ease forwards;
+}
+
+.collapse {
+  animation: collapse .3s ease forwards;
+}
+
+/* ========== Base List Item ========== */
+.sidebar li:not(:last-child) {
+  border-bottom: 1px solid var(--sb-border);
+  position: relative;
+}
+
+.sidebar li:hover > a {
+  background: var(--sb-bg-hover);
+  color: var(--sb-primary);
+  cursor: pointer;
+}
+
+.sidebar li.active > a {
+  background: var(--sb-bg-hover);
+  color: var(--sb-primary);
+}
+
+.sidebar li.active > a > span + * {
+  transform: rotate(90deg);
+}
+
+.sidebar li.active > a::before {
+  content: '';
+  height: 100%;
+  width: 3px;
+  background: var(--sb-primary);
+  display: block;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  position: absolute;
+}
+
+/* ========== Links ========== */
+.sidebar a {
+  display: block;
+  width: 100%;
+  padding: 15px 15px 15px var(--sb-pad);
+  color: var(--sb-text);
+  text-decoration: none;
+  position: relative;
+  transition: background .3s, color .3s;
+}
+
+.sidebar a:focus {
+  outline: 2px solid var(--sb-primary);
+  outline-offset: 2px;
+}
+
+.sidebar a > * {
+  float: none;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.sidebar a > :first-child:not(span) {
+  margin-right: 10px;
+}
+
+.sidebar a span + * {
+  //margin-left: 8px;
+  float: right;
+  transition: transform .3s ease-in-out;
+}
+
+/* ========== Nested UL ========== */
+.sidebar ul ul {
+  overflow: hidden;
+  transition: all .4s ease;
+}
+
+.sidebar ul ul > li {
+  border-bottom: none;
+  margin: 0;
+}
+
+.sidebar ul ul > li > a {
+  padding: 13px 13px 13px var(--sb-pad);
+  font-size: 0.95em;
+  color: var(--sb-text);
+}
