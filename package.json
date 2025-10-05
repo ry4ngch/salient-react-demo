@@ -4,10 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
     "build-babel": "babel src/app.js --out-file=public/scripts/app.js --presets=env,react --watch",
-    "build-file": "babel %npm_package_config_file% --out-file=public/scripts/app.js --presets=env,react --watch",
-    "build": "webpack --watch",
-    "demo": "echo %npm_package_config_file%",
+    "build": "webpack --mode production --config webpack.prod.js",
+    "build-file": "cross-env FILE=$npm_package_config_file babel $FILE --out-file=public/scripts/app.js --presets=env,react --watch",
+    "demo": "cross-env echo $npm_package_config_file",
     "serve": "live-server public",
     "dev-server": "webpack serve --mode development --open"
   },
@@ -45,6 +46,7 @@
     "babel-loader": "^9.2.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-plugin-transform-scss": "^1.2.0",
+    "cross-env": "^10.1.0",
     "css-loader": "^7.1.2",
     "live-server": "^1.2.0",
     "sass": "^1.82.0",
@@ -54,6 +56,7 @@
     "webpack": "^5.97.1",
     "webpack-bundle-analyzer": "^4.10.2",
     "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^5.2.0"
+    "webpack-dev-server": "^5.2.0",
+    "webpack-merge": "^6.0.1"
   }
 }
