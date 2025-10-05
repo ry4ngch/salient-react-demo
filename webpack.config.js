@@ -2,6 +2,7 @@ const path = require('path');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const sass = require('sass'); // Dart Sass for custom implementation
 const webpack = require('webpack'); //for using ProvidePlugin to expose jQuery globally
+const HtmlWebpackPlugin = require('html-webpack-plugin'); // for auto regenerate html dynamically during build
 
 module.exports = {
   entry: './src/app.js',
@@ -90,6 +91,11 @@ module.exports = {
     splitChunks: false,
   },
   plugins: [
+    //Automatically generates index.html and injects the correct bundle.js
+    new HtmlWebpackPlugin({
+      template: './public/index.html', // use your existing HTML as a template
+      filename: 'index.html', // output filename
+    }),
     new webpack.ProvidePlugin({
       $: 'jquery',      // Make jQuery available globally
       jQuery: 'jquery',  // Expose jQuery globally
