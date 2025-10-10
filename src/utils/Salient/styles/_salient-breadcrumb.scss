@@ -46,7 +46,7 @@ $bc-badge-txt-color: hsl(223, 14%, 20%);
 .sl-breadcrumb li > *, .sl-multi-steps li > * {
     /* single step */
     display: inline-block;
-    font-size: 1.4rem;
+    //font-size: 1.4rem;
     color: #2c3f4c;
 }
 
@@ -81,9 +81,9 @@ $bc-badge-txt-color: hsl(223, 14%, 20%);
         margin: 0 1em;
     }
 
-    .sl-breadcrumb li > *, .sl-multi-steps li > * {
-        font-size: 1.6rem;
-    }
+    // .sl-breadcrumb li > *, .sl-multi-steps li > * {
+    //     font-size: 1.6rem;
+    // }
 }
 
 /* -------------------------------- 
@@ -345,7 +345,7 @@ Add a counter to the multi-steps indicator
         height: 26px;
         width: 26px;
         line-height: 26px;
-        font-size: 1.4rem;
+        // font-size: 1.4rem;
         color: #ffffff;
     }
 

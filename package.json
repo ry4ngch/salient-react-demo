@@ -10,7 +10,7 @@
     "build-file": "cross-env FILE=$npm_package_config_file babel $FILE --out-file=public/scripts/app.js --presets=env,react --watch",
     "demo": "cross-env echo $npm_package_config_file",
     "serve": "live-server public",
-    "dev-server": "webpack serve --mode development --open"
+    "dev-server": "webpack serve --mode development --config webpack.dev.js --open"
   },
   "author": "Ryan",
   "license": "ISC",
@@ -51,6 +51,7 @@
     "css-loader": "^7.1.2",
     "html-webpack-plugin": "^5.6.4",
     "live-server": "^1.2.0",
+    "mini-css-extract-plugin": "^2.9.4",
     "sass": "^1.82.0",
     "sass-loader": "^16.0.4",
     "sass-migrator": "^2.2.1",

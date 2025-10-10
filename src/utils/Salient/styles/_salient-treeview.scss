@@ -9,7 +9,7 @@
 
 .list-tree {
     --tree-clr: #222;
-    --tree-font-size: 1.4rem;
+    --tree-font-size: 1rem;
     --tree-item-height: 2;
     --tree-offset: 1.5rem;
     --tree-thickness: 2px;
@@ -43,7 +43,7 @@
         border-color: transparent; /* hide (not remove!) border on last li element*/
     }
     & .comment{
-        font-size: 1.2rem;
+        font-size: .8rem;
         font-style: italic;
         font-weight: 100;
         opacity: .65;

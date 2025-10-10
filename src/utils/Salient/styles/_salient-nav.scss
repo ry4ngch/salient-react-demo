@@ -38,6 +38,12 @@ $navbar-blue-color: #def1f0;
 $navbar-blue-hoverbg: #def1f0;
 $navbar-blue-hovercolor: #0275d8;
 
+// Navy Color
+$navbar-navy-bgcolor: #101827;
+$navbar-navy-color: #fff;
+$navbar-navy-hoverbg: #1d283c;
+$navbar-navy-hovercolor: #fff;
+
 /* Global */
 
 .navbar {
@@ -96,6 +102,12 @@ nav.blue-scheme .hamburger div {
     background-color: $navbar-blue-color
 }
 
+nav.navy-scheme .hamburger:after, 
+nav.navy-scheme .hamburger:before, 
+nav.navy-scheme .hamburger div {
+    background-color: $navbar-navy-color
+}
+
 
 .hamburger.active:before {
     background-color: $navbar-default-color;
@@ -130,6 +142,13 @@ nav.blue-scheme .hamburger.active:after,
 nav.blue-scheme .hamburger.active div{
     background-color: $navbar-blue-color;
 }
+
+nav.navy-scheme .hamburger.active:before,
+nav.navy-scheme .hamburger.active:after,
+nav.navy-scheme .hamburger.active div{
+    background-color: $navbar-navy-color;
+}
+
 
 .hamburger.active div {
     background-color: $navbar-default-color;
@@ -229,6 +248,12 @@ nav.blue-scheme .arrow-left:after{
     border-color: $navbar-blue-color
 }
 
+nav.navy-scheme .search:before,
+nav.navy-scheme .search:after,
+nav.navy-scheme .arrow-left:after{
+    border-color: $navbar-navy-color
+}
+
 .search:after{
     position: relative;
     left: 1em;
@@ -304,6 +329,10 @@ nav.blue-scheme {
     background: $navbar-blue-bgcolor
 }
 
+nav.navy-scheme {
+    background: $navbar-navy-bgcolor
+}
+
 .navbar * {
     display: inline-block;
     float: none;
@@ -371,6 +400,10 @@ nav.blue-scheme {
     background-color: $navbar-blue-hoverbg;
 }
 
+.navbar.navy-scheme .search-box {
+    background-color: $navbar-navy-hoverbg;
+}
+
 .search-box .search {
     position: relative;
     top: 50%;
@@ -401,6 +434,11 @@ nav.grayscale-scheme .search-box .search:after {
 nav.blue-scheme .search-box .search:before,
 nav.blue-scheme .search-box .search:after {
     border-color: $navbar-blue-bgcolor;
+}
+
+nav.navy-scheme .search-box .search:before,
+nav.navy-scheme .search-box .search:after {
+    border-color: $navbar-navy-bgcolor;
 }
 
 .search-box input {
@@ -434,6 +472,10 @@ nav.grayscale-scheme .search-box input {
 
 nav.blue-scheme .search-box input {
     color: $navbar-blue-hovercolor;
+}
+
+nav.navy-scheme .search-box input {
+    color: $navbar-navy-hovercolor;
 }
 
 .search-box.hide {
@@ -481,6 +523,11 @@ nav.blue-scheme .navbar-brand span {
     color: $navbar-blue-color;
 }
 
+nav.navy-scheme .navlinks li a,
+nav.navy-scheme .navbar-brand span {
+    color: $navbar-navy-color;
+}
+
 .navlinks li:hover{
     background-color: $navbar-default-hoverbg;
 }
@@ -501,6 +548,9 @@ nav.blue-scheme .navlinks li:hover {
     background-color: $navbar-blue-hoverbg;
 }
 
+nav.navy-scheme .navlinks li:hover {
+    background-color: $navbar-navy-hoverbg;
+}
 
 nav.grayscale-scheme .navlinks li:hover a{
     color: $navbar-grayscale-hovercolor;
@@ -508,6 +558,10 @@ nav.grayscale-scheme .navlinks li:hover a{
 
 nav.blue-scheme .navlinks li:hover a{
     color: $navbar-blue-hovercolor;
+}
+
+nav.navy-scheme .navlinks li:hover a{
+    color: $navbar-navy-hovercolor;
 }
 
 .navlink-icon {
@@ -555,6 +609,10 @@ nav.grayscale-scheme li[data-dropdown] ul.dropdown-menu {
     background-color: $navbar-blue-bgcolor;
 }
 
+.navbar.navy-scheme li[data-dropdown] ul.dropdown-menu {
+    background-color: $navbar-navy-bgcolor;
+}
+
 .navbar.offwhite-scheme li[data-dropdown]:hover a.dropdown-item {
     color: $navbar-offwhite-color;
 }
@@ -565,6 +623,10 @@ nav.grayscale-scheme li[data-dropdown] ul.dropdown-menu {
 
 .navbar.blue-scheme li[data-dropdown] li:hover a.dropdown-item {
     color: $navbar-blue-hovercolor;
+}
+
+.navbar.navy-scheme li[data-dropdown] li:hover a.dropdown-item {
+    color: $navbar-navy-color;
 }
 
 nav.blue-scheme li[data-dropdown]:hover a.dropdown-item {
@@ -585,6 +647,10 @@ nav.grayscale-scheme li[data-dropdown] li:hover a.dropdown-item {
 
 nav.dark-scheme li[data-dropdown] li:hover a.dropdown-item {
     color: $navbar-dark-hovercolor;
+}
+
+nav.navy-scheme li[data-dropdown] li:hover a.dropdown-item {
+    color: $navbar-navy-hovercolor;
 }
 
 nav li[data-dropdown] ul.dropdown-menu li {
@@ -651,6 +717,11 @@ nav li[data-dropdown] ul.dropdown-menu.active-dropdown {
     nav.blue-scheme ul.sd-slide-in:not(.nav-collapse),
     nav.blue-scheme ul.sd-slide-down:not(.nav-collapse){
         background-color: $navbar-blue-bgcolor;
+    }
+
+    nav.navy-scheme ul.sd-slide-in:not(.nav-collapse),
+    nav.navy-scheme ul.sd-slide-down:not(.nav-collapse){
+        background-color: $navbar-navy-bgcolor;
     }
 
     ul.sd-slide-down:not(.nav-collapse){

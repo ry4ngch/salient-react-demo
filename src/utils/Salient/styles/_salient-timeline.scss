@@ -9,17 +9,20 @@ $color: (
   active: #ffad00
 );
 
-$node-size: 1em;
-$node-margin: 1em;
+$node-size: 1.5em;
+$node-margin: 1.5em; // for vertical (non-staggered)
 $line-width: .2em;
-$ul-padding: .2em;
-$shift-ul-line: 1em;
 $li-padding-top: 1em;
+$horz-nodeSize-padding: 2em;
 
 @mixin size($w, $h) {
     width: $w;
     height: $h;
   }
+
+.timeline * {
+  box-sizing: border-box; 
+}
 
 /** For data-show-count **/
 .timeline ul {
@@ -43,6 +46,18 @@ $li-padding-top: 1em;
   position: relative;
   opacity: 0;
   transition: opacity 1s ease-in-out !important;
+
+  &:not(.timeline-horz).center-events li {
+
+    * {
+      top: 50%;
+    }
+
+    &:hover::before {
+      height: 100%;
+      top: calc(50% + $node-size/2);
+    }
+  }
 
   small {
     display: block;
@@ -158,7 +173,6 @@ $li-padding-top: 1em;
         position: absolute;
         top: calc($li-padding-top + $node-size/2 + $line-width/2);
         bottom: 0;
-        //margin: auto 0;
         margin-left: calc($line-width/2); // this need to be exactly half the width of the line
         left: $node-margin;
     }
@@ -184,7 +198,7 @@ $li-padding-top: 1em;
   ul li {
     position: relative;
     margin-left: $node-margin;
-    padding-left: 2em;
+    padding-left: $horz-nodeSize-padding;
     padding-bottom: 1em;
     padding-top: $li-padding-top;
     transition: .2s transform ease-in-out, .8s opacity ease-in-out;
@@ -236,7 +250,7 @@ $li-padding-top: 1em;
     background-color: map.get($color, reverse);
     border: $line-width solid map.get($color, sub);
     display: block;
-    left: -#{calc($node-size/2)};
+    left: -#{calc($node-size/2 - $line-width)};
     position: absolute;
     z-index: 2;
     cursor: pointer;
@@ -270,8 +284,8 @@ $li-padding-top: 1em;
   width: $line-width;
   position: absolute;
   left: calc($line-width/2);
-  top: calc($node-size/2 + $li-padding-top + $line-width/2);
-  height: calc(100% - $li-padding-top + $node-size/2 - $line-width/2);
+  top: calc($node-size/2 + $li-padding-top);
+  height: calc(100% - $node-size/2 + $li-padding-top);
   display: block;
 }
 
@@ -279,7 +293,7 @@ $li-padding-top: 1em;
 .timeline ul li:last-child:hover::before,
 .timeline ul li.active-event ~ li:last-child::before,
 .timeline ul li.active-event:last-child:hover::before {
-  height: calc(100% - $li-padding-top - $node-size/2 - $line-width/2);
+  height: calc(100% - $node-size/2 - $li-padding-top);
 }
 
 // upon hover, make all ul:before line func color
@@ -306,7 +320,7 @@ $li-padding-top: 1em;
 .timeline-staggered li:nth-child(even) {
   position: relative;
   margin-left: 0;
-  width: calc(50% - $node-size)
+  width: calc(50% - $node-size);
 }
 
 
@@ -314,17 +328,17 @@ $li-padding-top: 1em;
   margin-left: calc(50% + 1em) !important;
 }
 
-.timeline-staggered ul::before {
+.timeline-staggered:not(.timeline-horz) ul::before {
   left: calc(50% + 1em);
 }
 
 .timeline-staggered li:nth-child(even) .timeline-event-icon {
-  left: calc(100% - $node-size/2)
+  left: calc(100% + 1em + $line-width + $node-size/2);
 }
 
 .timeline-staggered li:nth-child(even):hover::before,
 .timeline-staggered li:nth-child(even).active-event::before {
-  left: calc(100% + $line-width/2)
+  left: calc(100% + 1em + $node-size + $line-width/2);
 }
 
 .timeline-staggered li:nth-child(even) {
@@ -334,7 +348,7 @@ $li-padding-top: 1em;
 
 .timeline-staggered ul li:hover ~ li:nth-child(even)::before,
 .timeline-staggered.timeline-active ul li.active-event ~ li:nth-child(even)::before {
-  left: calc(100% + $line-width/2);
+  left: calc(100% + 1em + $node-size + $line-width/2);
 }
 
 .timeline li.hide-timeline{
@@ -350,11 +364,21 @@ $li-padding-top: 1em;
     height: $line-width;
     right: 1em;
     margin: 0 auto;
-    top: calc($node-size/2 + $line-width/2 + $ul-padding);
+    top: calc($node-size/2 - $line-width/2 + $li-padding-top);
+  }
+
+  .timeline-horz:not(.timeline-staggered).center-events ul li {
+    * {
+      top: $li-padding-top
+    }
+
+    .timeline-event-icon {
+      top: $li-padding-top
+    }
   }
 
   .timeline-horz ul::before {
-    width: calc(100% - $shift-ul-line);
+    width: 100%;
     height: $line-width;
   }
 
@@ -362,8 +386,14 @@ $li-padding-top: 1em;
   .timeline-horz ul li:hover::before,
   .timeline-horz.timeline-active ul li.active-event::before,
   .timeline-horz.timeline-active ul li.active-event ~ li::before {
-    width: calc(100% + $shift-ul-line);
     height: $line-width;
+    width: calc(100% + $horz-nodeSize-padding + 0.2em - $node-size);
+    left: calc($node-size/2 + 0.2em);
+  }
+
+  .timeline-horz.timeline-staggered li:nth-child(even):hover::before {
+    left: calc($node-size/2);
+    width: calc(100% + 0.2em);
   }
 
   .timeline-horz ul li:hover ~ li:last-child::before,
@@ -404,11 +434,7 @@ $li-padding-top: 1em;
 
       &:hover ~ li::before,
       &.active-event ~ li::before{
-        top: calc($node-size/2 + $line-width/2 + $ul-padding);
-      }
-
-      .timeline-event-icon {
-        top: $ul-padding;
+        top: calc($node-size/2 - $line-width/2 + $li-padding-top);
       }
 
       &:nth-child(odd) {
@@ -429,10 +455,6 @@ $li-padding-top: 1em;
     left: calc(-2em + $line-width/2); 
   }
 
-  .timeline-horz.timeline-staggered ul::before {
-    left: $shift-ul-line;
-  }
-
   .timeline-horz.timeline-staggered li:nth-child(odd) {
     margin-left: 0 !important;
     height: 50%;
@@ -443,7 +465,7 @@ $li-padding-top: 1em;
   }
 
   .timeline-horz.timeline-staggered ul li:last-child::before {
-    width: calc(100% - $shift-ul-line);
+    width: 100%;
     height: $line-width;
   }
 
@@ -462,12 +484,11 @@ $li-padding-top: 1em;
 
     .timeline-event-icon {
       left: 0;
-      top: -#{calc($node-size/2 + $line-width/2)};
+      top: -#{calc($node-size/2 - $line-width/2)};
     }
 
     &:hover::before,
     &.active-event::before {
-      left: $shift-ul-line;
       top: 0;
     }
   }
@@ -484,7 +505,7 @@ $li-padding-top: 1em;
   }
 
   .timeline-staggered.timeline-horz li:nth-child(odd) .timeline-event-icon {
-    top: calc(100% - $node-size/2 - $line-width/2)
+    top: calc(100% - $node-size/2 + $line-width/2)
   }
 
   .timeline-staggered.timeline-horz ul {
@@ -515,13 +536,13 @@ $li-padding-top: 1em;
       &:hover ~ li::before,
       &.active-event::before,
       &.active-event ~ li::before {
-        left: calc(50% + 1em) !important;
-        width: calc(100% + 1em + 1em);
+        left: 50% !important;
+        width: 100%;
       }
 
 
       .timeline-event-icon {
-        left: 50% !important;
+        left: calc(50% - $node-size/2) !important;
   
         ~ * {
           left: auto;

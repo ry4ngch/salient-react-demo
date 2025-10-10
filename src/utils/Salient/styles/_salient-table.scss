@@ -361,6 +361,52 @@ table.sl-table {
   }
 }
 
+/** Grid View **/
+table.gridView tbody {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  padding: 0 4px;
+  margin: auto;
+}
+
+.gridView tr {
+  flex-grow: 1;
+  border-radius: 4px;
+  width: calc(50% - 16px);
+  background: #eee;
+  align-content: flex-start;
+}
+
+.gridView td {
+  border: 0;
+}
+
+table.gridView thead {
+  border: none;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+table.gridView td::before {
+  content: attr(data-field);
+  float: left;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+table.gridView td {
+  display: block;
+  text-align: right;
+}
 
 
 /** Responsive **/

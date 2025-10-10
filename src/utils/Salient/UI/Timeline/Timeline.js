@@ -77,13 +77,17 @@ const Timeline = (props) => {
     // handle window resize event
     useEffect(() => {
         const observer = new ResizeObserver(() => {
-            handleUlResize();
+            requestAnimationFrame(() => {
+                handleUlResize();
+            })
         });
     
-        observer.observe(timelineRef.current);
+        if(timelineRef.current){
+            observer.observe(timelineRef.current);
+        }
     
         return () => observer.disconnect();
-    }, []);
+    }, [props.isHorz, props.isStaggered, props.centerEvents]);
 
     // handle UL resize due to props and state change
     useEffect(() => {
@@ -132,7 +136,7 @@ const Timeline = (props) => {
           }) : item
         )}
       </ul>
-      {props.showControls && <button className="toggle-timeline toggle-forward" onClick={() => handlePaginationClick('next')} disabled={startIndex + props.showCount >= totalItems} style={{cursor: (startIndex + props.showCount >= totalItems) ? 'not-allowed' : 'pointer'}}></button>}
+      {props.showControls && <button className="toggle-timeline toggle-forward" onClick={() => handlePaginationClick('next')} disabled={startIndex + props.showCount >= totalItems} style={{cursor: (startIndex + props.showCount >= totalItems) ? 'not-allowed' : 'pointer'}}></button>} 
     </div>
   );
 };
