@@ -25,7 +25,8 @@ module.exports = merge(common, {
             loader: 'css-loader',
             options: {
               modules: {
-                localIdentName: '[name]__[local]__[hash:base64:5]',
+                localIdentName: '[name]__[local]__[hash:base64:5]', // Generate scope class names
+                namedExport: false, //Ensure default export is used for styles
               },
               importLoaders: 1,
               sourceMap: true,
