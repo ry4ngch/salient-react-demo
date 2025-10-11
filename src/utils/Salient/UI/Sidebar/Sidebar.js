@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect} from "react";
+import React, {useState, useRef} from "react";
 import classNames from "classnames";
 
 const Sidebar = ({children, className, ...rest}) => {
@@ -13,7 +13,7 @@ const Sidebar = ({children, className, ...rest}) => {
     )
 }
 
-const SideBarItem = ({iconPrefix, iconSuffix='icon icon-right', title, children, level=0, ...rest}) => {
+const SideBarItem = ({iconPrefix, iconSuffix='icon icon-right', title, children, level=0, notification, ...rest}) => {
     const [showSubMenu, setShowSubMenu] = useState(false);
     const [isAnimating, setIsAnimating] = useState(false);
     const subListRef = useRef();
@@ -52,7 +52,10 @@ const SideBarItem = ({iconPrefix, iconSuffix='icon icon-right', title, children,
       >
         <a onClick={expandSubMenu}>
           {iconPrefix && <i className={iconPrefix} aria-hidden="true"></i>}
-          <span>{title}</span>
+          <span>
+            {title}
+            {notification && <span className="notification">{notification}</span>}
+        </span>
           {(iconSuffix && React.Children.count(children) > 0) && <i className={iconSuffix} aria-hidden="true"></i>}
         </a>
   

@@ -285,7 +285,7 @@ const TableRow = ({ children, hiddenColumns, draggable, onDragStart, onDragOver,
             onDragOver={onDragOver}
             onDrop={onDrop}
             onDragLeave={onDragLeave}
-            className={[className || '', isHighlighted ? 'row-insert-highlight' : ''].join(' ').trim()}
+            className={[className || '', isHighlighted ? 'row-insert-highlight' : '', selectRow ? 'row-selected' : ''].join(' ').trim()}
             >
             {showRowSelector && <td className="row-checkbox"><input type="checkbox" checked={selectRow} onChange={() => updateRowCheckState(rowId)}/></td>}
             {React.Children.map(children, (cell, index) => 

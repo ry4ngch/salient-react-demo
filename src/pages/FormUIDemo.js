@@ -7,6 +7,7 @@ import Dropdown, {DropdownItem} from '../utils/Salient/UI/Form/Dropdown';
 import FormAffix from '../utils/Salient/UI/Form/FormAffix';
 import NumericField from '../utils/Salient/UI/Form/NumericField';
 import TextField from '../utils/Salient/UI/Form/TextField';
+import RangeSlider from '../utils/Salient/UI/Form/RangeSlider';
 
 const FormUIsDemo = () => {
   const testNumericFieldCallback = (returnVal) => {
@@ -15,6 +16,10 @@ const FormUIsDemo = () => {
   }
 
   const testRef = useRef(null);
+
+  const updateSliderValue = () => {
+    //console.log(event.target.value);
+  }
 
   return (
         <React.Fragment>
@@ -90,6 +95,17 @@ const FormUIsDemo = () => {
                         inputSuffix={<FontAwesomeIcon icon="eye" style={{padding: '0 5px'}}/>}
                         label="Username:"
                     />
+                </CardContent>
+            </Card>
+
+            <Card className="card-border">
+                <CardInfo>
+                    <CardTitle>Form Controls - Range Slider</CardTitle>
+                </CardInfo>
+                <CardContent>
+                   <RangeSlider defaultValue={40} label="Default Theme Slider" displayMinMaxText={{min: true, max: true}} onChange={updateSliderValue}/>
+                   <RangeSlider defaultValue={30} label="Gray Theme Slider" theme="gray"/>
+                   <RangeSlider defaultValue={60} label="Dark Theme Slider" theme="dark"/>
                 </CardContent>
             </Card>
         </React.Fragment>

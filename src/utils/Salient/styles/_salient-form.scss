@@ -285,6 +285,7 @@
 
       &.btn-increment {
         border-radius: 0 0px 0 4px;
+        border-right: none;
       }
     }
   }
@@ -311,6 +312,7 @@
 
       &.btn-increment {
         border-radius: 4px 0 0 0;
+        border-right: none;
       }
 
       &.btn-decrement {
@@ -420,4 +422,100 @@
 .error-highlight {
   background-color: #fce4e4;
   border: 1px solid #cc0033;
+}
+
+/* Slider */
+:root {
+  --slider-primary-color: #1976d2; 
+  --slider-secondary-color: #e0eafc;
+  --slider-text-color: #757575;
+}
+
+
+.slider-group.gray-slider {
+  --slider-primary-color: #6b7280;
+  --slider-secondary-color: #e0e0e0;
+  --slider-text-color: #6b7280;
+}
+
+.slider-group.dark-slider {
+  --slider-primary-color: #343a40;
+  --slider-secondary-color: #e0e0e0;
+  --slider-text-color: #343a40;
+}
+
+
+$track-height: 4px;
+$thumb-height: 20px;
+
+.slider-group {
+  margin-bottom: var(--spacing-unit);
+}
+
+.slider-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.slider-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+input[type="range"] {
+  flex: 1;
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  border-radius: 2px;
+  outline: none;
+}
+
+/*** Thumbs ***/
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: $thumb-height;
+  height: $thumb-height;
+  background: var(--slider-primary-color);
+  border-radius: 50%;
+  cursor: pointer;
+  margin-top: calc(($track-height/2) - ($thumb-height/2)); /* center align */
+  transition: all 0.2s ease;
+}
+
+/*** For Firefox ***/
+input[type="range"]::-moz-range-thumb {
+  width: $thumb-height;
+  height: $thumb-height;
+  border: none;
+  background: var(--slider-primary-color);
+  border-radius: 50%;
+  cursor: pointer;
+  margin-top: 0;
+  transition: all 0.2s ease;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: $track-height;
+  background: linear-gradient(
+    to right,
+    var(--slider-primary-color) var(--progress), /* Green fill up to --progress */
+    var(--slider-secondary-color) var(--progress) /* Grey for the rest */
+  );
+  border-radius: $track-height;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+}
+
+.value-display {
+  min-width: 40px;
+  text-align: right;
+  font-size: 1rem;
+  color: var(--slider-text-color);
 }
