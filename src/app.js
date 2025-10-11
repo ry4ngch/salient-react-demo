@@ -30,6 +30,7 @@ import ModalDemo from './pages/ModalDemo';
 import BadgesDemo from './pages/BadgesDemo';
 import BannersDemo from './pages/BannersDemo';
 import SidebarDemo from './pages/SidebarDemo';
+import ProgressDemo from './pages/ProgressDemo';
 import Table2 from './components/TestTables/Table2';
 
 // import Navigate Provider context
@@ -107,8 +108,8 @@ const router = createBrowserRouter([
 				element: <SidebarDemo/>
 			},
 			{
-				path: '/test',
-				element: <Table2/>
+				path: '/progress',
+				element: <ProgressDemo/>
 			},
 
 		]

@@ -16,6 +16,7 @@ const NavigateContext = React.createContext({
         {name: 'Banners', link: '/banners'},
         {name: 'Sidebar', link: '/sidebar'},
         {name: 'FormUIs', link: '/formUIs'},
+        {name: 'Progress', link: '/progress'},
     ],
 })
 
