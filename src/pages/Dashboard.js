@@ -1,8 +1,6 @@
 import React, {useState, useContext} from "react";
 import List, {ListItem} from '../utils/Salient/UI/List/List';
-import Card, {CardContent} from '../utils/Salient/UI/Card/Card';
 import { useNavigate } from "react-router-dom";
-import PageContent from "../components/pageContent";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import NavigateContext from '../store/navigate-context';
 import Banner, {BannerContent} from "../utils/Salient/UI/Banner/Banner";

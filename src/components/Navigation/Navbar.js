@@ -3,11 +3,17 @@ import Nav, {NavMenu} from '../../utils/Salient/UI/Navigation/Nav';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 import NavigateContext from '../../store/navigate-context';
+import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
     const ctx = useContext(NavigateContext);
     const [navbarTheme, setNavbarTheme] = useState('gray');
     const navbarThemesSet = ['gray', 'offwhite', 'dark', 'blue', 'navy'];
+    const navigate = useNavigate();
+
+    const navigatePage = (link) => {
+        navigate(link);
+    }
     return (
         <Nav title="Salient" theme={navbarTheme} shift={true} navSlideDown={false} brandLogo={<FontAwesomeIcon icon="circle-notch" size="2x" className="brand-icon"></FontAwesomeIcon>}>
             <NavMenu>
@@ -24,7 +30,7 @@ const Navbar = () => {
                     </a>
                     <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         {ctx.pageLinks.map((page, index) => (
-                             <li key={index}><Link className="dropdown-item" to={page.link}>{page.name}</Link></li>
+                            <li key={index} onClick={() => navigatePage(page.link)}><a className="dropdown-item">{page.name}</a></li>
                         ))}
                     </ul>
                 </li>

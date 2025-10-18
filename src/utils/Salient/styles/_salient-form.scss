@@ -519,3 +519,50 @@ input[type="range"]::-webkit-slider-thumb:hover {
   font-size: 1rem;
   color: var(--slider-text-color);
 }
+
+/* Text Field - In Development */ 
+// .text-field {
+//   position: relative;
+//   margin-bottom: 16px;
+// }
+
+// .text-field input,
+// .text-field textarea,
+// .text-field select {
+//   width: 100%;
+//   padding: 12px;
+//   border: 1px solid rgba(0, 0, 0, 0.23);
+//   border-radius: var(--border-radius);
+//   font-size: 16px;
+//   background-color: transparent;
+//   transition: border-color 0.3s ease;
+// }
+
+// .text-field label {
+//   position: absolute;
+//   top: 12px;
+//   left: 12px;
+//   color: var(--text-secondary);
+//   pointer-events: none;
+//   transition: all 0.3s ease;
+//   background-color: var(--surface);
+//   padding: 0 4px;
+// }
+
+// .text-field input:focus,
+// .text-field textarea:focus,
+// .text-field select:focus {
+//   outline: none;
+//   border-color: var(--primary-color);
+// }
+
+// .text-field input:focus + label,
+// .text-field textarea:focus + label,
+// .text-field select:focus + label,
+// .text-field input:not(:placeholder-shown) + label,
+// .text-field textarea:not(:placeholder-shown) + label {
+//   top: -8px;
+//   left: 8px;
+//   font-size: 12px;
+//   color: var(--primary-color);
+// }
