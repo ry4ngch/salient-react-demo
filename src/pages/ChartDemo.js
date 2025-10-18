@@ -19,6 +19,7 @@ const dummy_data = [
 const ChartDemo = () => {
     const [labelSide, setLabelSide] = useState(false);
     const [isHorz, setIsHorz] = useState(true);
+    const [theme, setTheme] = useState(null);
 
     return (
         <Card className="card-border">
@@ -27,16 +28,29 @@ const ChartDemo = () => {
                 <div style={{display: 'inline-block'}}>
                     <select value={labelSide} onChange={() => setLabelSide((prevState) => !prevState)}>
                         <option value="true">Side Label</option>
-                        <option value="false">No Side Label</option>
+                        <option value="false">Inline Label</option>
                     </select>
                     <select value={isHorz} onChange={() => setIsHorz((prevState) => !prevState)}>
                         <option value="true">Horizontal</option>
                         <option value="false">Vertical</option>
                     </select>
+                    <select value={theme} onChange={(event) => setTheme(event.target.value)}>
+                        <option value="">Default</option>
+                        <option value="forest">Forest</option>
+                        <option value="sunset">Sunset</option>
+                        <option value="indigo">Indigo</option>
+                    </select>
                 </div>
             </CardInfo>
             <CardContent>
-                <Chart isHorz={isHorz} labelSide={labelSide} calculatePctFromTotal={false} calculatePctFromMax={false} showCalculatedValues={false} title="Number of Orders per Month">
+                <Chart 
+                    isHorz={isHorz} 
+                    labelSide={labelSide} 
+                    calculatePctFromTotal={false} 
+                    calculatePctFromMax={false} 
+                    showCalculatedValues={false} 
+                    title="Number of Orders per Month" 
+                    theme={theme}>
                     {dummy_data.map((item, index) => (
                         <BarChart key={index} label={item.label} value={item.value}/>           
                     ))}

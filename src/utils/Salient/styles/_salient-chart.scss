@@ -1,8 +1,55 @@
+@use 'sass:color';
+
+
+$chart-fill-color: #275EFE;
+:root {
+  --chart-fill-color: #{$chart-fill-color};
+  --chart-fill-bgColor: #081921;
+  --chart-bar-size: 8px;
+}
+
+@mixin color-scheme($fill) {
+  background: color.adjust($fill, $lightness: 5%);
+}
+
 /** Bar Chart **/
 .chart {
     display: flex;
     flex: 1;
     flex-direction: column;
+
+    /* Theme */
+    &.chart-fill--sunset{
+      --chart-fill-color: hsl(342, 92%, 46%);
+
+      .chart--bar:hover {
+        .chart--fill {
+          @include color-scheme(hsl(342, 92%, 46%));
+        }
+      }
+    }
+
+    &.chart-fill--forest{
+      --chart-fill-color: #40bb93;
+
+      .chart--bar:hover {
+        .chart--fill {
+          @include color-scheme(#40bb93);
+        }
+      }
+    }
+
+    &.chart-fill--indigo{
+      --chart-fill-color: #5a67d8;
+
+      .chart--bar:hover {
+        .chart--fill {
+          @include color-scheme(#5a67d8);
+        }
+      }
+    }
+
+    /** END Theme **/
 
     * {
       box-sizing: border-box;
@@ -20,9 +67,9 @@
   
     .chart--bar{
       position:relative;
-      background:#081921;
+      background: var(--chart-fill-bgColor);
       display:block;
-      border-radius: 12px;
+      border-radius: calc(2*var(--chart-bar-size));
     }
 
     .chart--title {
@@ -31,8 +78,16 @@
   
     .chart--fill{
       height: 100%;
-      background: #03a9f4;
+      background: var(--chart-fill-color);
       border-radius: inherit;
+    }
+
+    .chart--bar:hover {
+      .chart--fill {
+        //background: color.adjust($chart-fill-color, $lightness: 5%);
+        @include color-scheme($chart-fill-color);
+        box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+      }
     }
   
     .chart--label {
@@ -78,12 +133,12 @@
       .chart--bar {
         margin-top:5px;
         width:100%;
-        height:6px;
+        height:var(--chart-bar-size);
       }
     }
 
     &.chart--vert {
-        height: 12rem;
+        height: 15rem;
 
         ul {
           display: flex;
@@ -109,9 +164,8 @@
 
         .chart--bar {
             height: 100%;
-            width: 6px;
-            border: 1px solid #313131;
-            border-radius: 12px;
+            width: var(--chart-bar-size);
+            border-radius: calc(2*var(--chart-bar-size));
             overflow: hidden;
             display: flex;
             flex-direction: column;

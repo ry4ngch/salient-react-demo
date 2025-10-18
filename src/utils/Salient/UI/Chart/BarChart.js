@@ -1,12 +1,13 @@
 import React, {useMemo} from "react";
 import classNames from "classnames";
 
-const Chart = ({className, isHorz=true, labelSide=true,  calculatePctFromMax=false, calculatePctFromTotal=false, showCalculatedValues=false, children, title, ...rest}) => {
+const Chart = ({className, isHorz=true, labelSide=true,  calculatePctFromMax=false, calculatePctFromTotal=false, showCalculatedValues=false, children, theme, title, ...rest}) => {
     const chartClasses = classNames("chart", 
         { 
           'chart--vert': !isHorz,
           'chart--horz': isHorz,
-          'label--side': labelSide
+          'label--side': labelSide,
+          ['chart-fill--'+theme]: theme,
         }
     );
   
