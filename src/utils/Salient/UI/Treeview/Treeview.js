@@ -1,18 +1,19 @@
-import React, {useEffect, useState, useRef} from "react";
+import React, {useEffect, useState} from "react";
+import classNames from "classnames";
 
-const Treeview = (props) => {
+const Treeview = ({children, className, ...rest}) => {
     return (
-        <section className="list-tree">
+        <section {...rest} className={classNames('list-tree', className)}>
             <ul>
-                {props.children}    
+                {children}    
             </ul>
       </section>
     )
 }
 
-const TreeItem = ({ children, text, subtext }) => {
-    const [isExpanded, setIsExpanded] = useState(true);
-    const [isVisible, setIsVisible] = useState(true);
+const TreeItem = ({ children, text, subtext, expandOnLoad=false, className, ...rest }) => {
+    const [isExpanded, setIsExpanded] = useState(expandOnLoad);
+    const [isVisible, setIsVisible] = useState(expandOnLoad);
 
     useEffect(() => {
         if (!isExpanded) {
@@ -21,16 +22,16 @@ const TreeItem = ({ children, text, subtext }) => {
             }, 300); // Delay hiding after animation
             return () => clearTimeout(timer);
         } else {
-            setIsVisible(true);
+           setIsVisible(true);
         }
     }, [isExpanded]);
 
     const toggleExpand = () => {
-        setIsExpanded(!isExpanded);
+        setIsExpanded((prevState) => !prevState);
     };
 
     return (
-        <li>
+        <li {...rest} className={classNames(className)}>
             <span 
                 onClick={toggleExpand} 
                 title={children ? (isExpanded ? 'Collapse this branch' : 'Expand this branch') : undefined}
@@ -40,7 +41,7 @@ const TreeItem = ({ children, text, subtext }) => {
             </span>
             {subtext && <span className='comment'>{subtext}</span>}
             {children && isVisible && (
-                <ul className={isExpanded ? '' : 'hide'}>
+                <ul className={isExpanded ? 'expand' : 'collapse'}>
                     {React.Children.map(children, (child) =>
                         React.isValidElement(child) ? React.cloneElement(child) : child
                     )}

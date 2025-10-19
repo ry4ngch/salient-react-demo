@@ -1,32 +1,28 @@
 import React, {useEffect, useState, useRef, useMemo} from "react";
 
-const Accordian = (props) => {
+const Accordian = ({activeToggle='multiple', children, className, ...rest}) => {
     const initialAccordianState = useMemo(() => {
-        return Object.fromEntries((props.children || []).map((_, index) => [index, false]));
-      }, [props.children]);
+        return Object.fromEntries((children || []).map((_, index) => [index, false]));
+      }, [children]);
       
       const [_accordianItemsState, _setAccordianItemsState] = useState(initialAccordianState);
       
       useEffect(() => {
         _setAccordianItemsState((prevState) => {
           const updatedState = Object.fromEntries(
-            (props.children || []).map((_, index) => [index, prevState[index] ?? false])
+            (children || []).map((_, index) => [index, prevState[index] ?? false])
           );
           return updatedState;
         });
-      }, [props.children]);
+      }, [children]);
     
     return (
-        <div className={['accordian', props.className || ''].join(' ').trim()} data-active-toggle={props.activeToggle}>
-            {React.Children.map(props.children, (child, _refIndex) => 
-                React.isValidElement(child) ? React.cloneElement(child, { _accordianItemsState, _setAccordianItemsState, _refIndex, activeToggle: props.activeToggle }) : child
+        <div {...rest} className={['accordian', className || ''].join(' ').trim()} data-active-toggle={activeToggle}>
+            {React.Children.map(children, (child, _refIndex) => 
+                React.isValidElement(child) ? React.cloneElement(child, { _accordianItemsState, _setAccordianItemsState, _refIndex, activeToggle: activeToggle }) : child
             )}
         </div>
     )
-}
-
-Accordian.defaultProps = {
-    activeToggle: 'multiple'
 }
 
 const AccordianItem = (props) => {

@@ -13,11 +13,11 @@ const TreeviewDemo = () => {
           </CardInfo>
           <CardContent>
             <Treeview>
-              <TreeItem text='Item 1' subtext="(with levels)">
+              <TreeItem text='Item 1' subtext="(with levels)" expandOnLoad={true}>
                 <li><span>1.1</span></li>
                 <li><span>1.2</span></li>
               </TreeItem>
-              <TreeItem text='Item 2' subtext="(multilevel)">
+              <TreeItem text='Item 2' subtext="(multilevel)" expandOnLoad={true}>
                 <li><span>2.1</span></li>
                 <TreeItem text="2.2">
                   <li><span>2.2.1</span></li>
@@ -39,11 +39,11 @@ const TreeviewDemo = () => {
             </CardInfo>
             <CardContent>
                 <Treeview>
-                    <TreeItem text='Item 1' subtext="(with levels)">
-                    <li><span>1.1</span></li>
-                    <li><span>1.2</span></li>
+                    <TreeItem text='Item 1' subtext="(with levels)" expandOnLoad={true}>
+                      <li><span>1.1</span></li>
+                      <li><span>1.2</span></li>
                     </TreeItem>
-                    <TreeItem text='Item 2' subtext="(multilevel)">
+                    <TreeItem text='Item 2' subtext="(multilevel)" expandOnLoad={true}>
                     <li><span>2.1</span></li>
                     <TreeItem text="2.2">
                         <li><span>2.2.1</span></li>

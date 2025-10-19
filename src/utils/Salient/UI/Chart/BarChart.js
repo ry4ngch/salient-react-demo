@@ -34,11 +34,11 @@ const Chart = ({className, isHorz=true, labelSide=true,  calculatePctFromMax=fal
                             
                             return React.cloneElement(child, {
                                 ...child.props,
-                                isHorz,
-                                labelSide,
-                                showCalculatedValues,
-                                chartTotal: calculatePctFromTotal ? totalValue : maxValue,
-                                normalizeValues: calculatePctFromMax || calculatePctFromTotal
+                                _isHorz: isHorz,
+                                _labelSide: labelSide,
+                                _showCalculatedValues: showCalculatedValues,
+                                _chartTotal: calculatePctFromTotal ? totalValue : maxValue,
+                                _normalizeValues: calculatePctFromMax || calculatePctFromTotal
                             })
                         } else {
                             return child;
@@ -50,13 +50,13 @@ const Chart = ({className, isHorz=true, labelSide=true,  calculatePctFromMax=fal
     )
 }
 
-const BarChart = ({label, value=0, isHorz, labelSide, chartTotal=100, normalizeValues=false, labelUnit='', showCalculatedValues, ...rest}) => {
+const BarChart = ({label, value=0, labelUnit='', _isHorz, _labelSide, _chartTotal=100, _normalizeValues=false, _showCalculatedValues, ...rest}) => {
     
-    const shouldNormalize = normalizeValues || value > 100;
-    let calculatedValue = shouldNormalize ? parseFloat(((value / chartTotal)*100)) : value
+    const shouldNormalize = _normalizeValues || value > 100;
+    let calculatedValue = shouldNormalize ? parseFloat(((value / _chartTotal)*100)) : value
     calculatedValue = Math.min(parseFloat(calculatedValue.toFixed(2)), 100);
     let chartFillStyle;
-    if(isHorz) {
+    if(_isHorz) {
         chartFillStyle = {width: `${calculatedValue}%`};
     } else {
         chartFillStyle = {height: `${calculatedValue}%`};
@@ -67,15 +67,15 @@ const BarChart = ({label, value=0, isHorz, labelSide, chartTotal=100, normalizeV
         <li {...rest}>
             <span className="chart--label">
                 <span>{label}</span>
-                {((isHorz && labelSide) || (!isHorz)) && <span className="chart--indicator">{`${showCalculatedValues ? calculatedValue : value}${showCalculatedValues ? '%' : labelUnit}`}</span>}
+                {((_isHorz && _labelSide) || (!_isHorz)) && <span className="chart--indicator">{`${_showCalculatedValues ? calculatedValue : value}${_showCalculatedValues ? '%' : labelUnit}`}</span>}
             </span>
             <span className="chart--bar">
                 <div className="chart--fill" style={chartFillStyle}></div>
             </span>
             {
-                isHorz && !labelSide && 
+                _isHorz && !_labelSide && 
                 <span className="chart--label">
-                    <span className="chart--indicator">{`${showCalculatedValues ? calculatedValue : value}${showCalculatedValues ? '%' : labelUnit}`}</span>
+                    <span className="chart--indicator">{`${_showCalculatedValues ? calculatedValue : value}${_showCalculatedValues ? '%' : labelUnit}`}</span>
                 </span>
             }
         </li>

@@ -51,9 +51,11 @@ $navbar-navy-hovercolor: #fff;
     line-height: 1;
 }
 
-// .navbar > * {
-//     font-size: 1.4rem;
-// }
+.navbar {
+    * {
+        -webkit-tap-highlight-color: transparent;
+    }
+}
 
 /* Hamburger Menu Icon */
 

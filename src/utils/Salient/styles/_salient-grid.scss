@@ -1,0 +1,42 @@
+
+.grid {
+    width: 100%;
+    display: table;
+    border-collapse:separate;
+    border-spacing:0px;
+
+    * {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }   
+
+    .item {
+        display: table-cell;
+    }
+
+    .grid-row {
+        width: 100%;
+        display: table;
+        table-layout: fixed;
+    }
+
+}
+
+
+@media screen and (max-width: 480px) {
+    .grid {
+        .grid-row {
+            display: block;
+            width: 100%;
+            margin:0;
+        }
+            
+        .item {
+            display: block;
+            width: 100%;
+            margin: 0 0 5px 0;
+        }  
+    }
+}
+

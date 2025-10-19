@@ -33,6 +33,7 @@ import SidebarDemo from './pages/SidebarDemo';
 import ProgressDemo from './pages/ProgressDemo';
 import Table2 from './components/TestTables/Table2';
 import ChartDemo from './pages/ChartDemo';
+import GridDemo from './pages/GridDemo';
 
 // import Navigate Provider context
 import { AppProvider } from './store/navigate-context';
@@ -115,6 +116,10 @@ const router = createBrowserRouter([
 			{
 				path: '/chart',
 				element: <ChartDemo/>
+			},
+			{
+				path: '/grid',
+				element: <GridDemo/>
 			},
 
 		]

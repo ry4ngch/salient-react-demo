@@ -19,17 +19,26 @@
     display: grid;
     list-style: none;
     font-size: var(--tree-font-size);
-    transform-origin: top;
-    transform: scaleY(1);
-    opacity: 1;
-    max-height: 1000px;
+    transform-origin: top left;
     overflow: hidden;
     transition: transform .3s ease-in-out, opacity 0.3s ease-in-out, max-height 0.3s ease-in-out;
     
-    &.hide {
-        transform: scaleY(0);
-        opacity: 0;
-        max-height: 0;
+    @keyframes show {
+        from { max-height: 0; opacity: 0; scale: 0 }
+        to { max-height: 1000px; opacity: 1; scale: 1 }
+    }
+    
+    @keyframes hide {
+        from { max-height: 1000px; opacity: 1; scale: 1}
+        to { max-height: 0; opacity: 0; scale: 0}
+    }
+    
+    &.expand {
+        animation: show .3s ease forwards;
+    }
+    
+    &.collapse {
+        animation: hide .3s ease forwards;
     }
 }
 .list-tree li{
