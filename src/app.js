@@ -34,6 +34,7 @@ import ProgressDemo from './pages/ProgressDemo';
 import Table2 from './components/TestTables/Table2';
 import ChartDemo from './pages/ChartDemo';
 import GridDemo from './pages/GridDemo';
+import MaintenancePage from './Maintenance';
 
 // import Navigate Provider context
 import { AppProvider } from './store/navigate-context';
@@ -127,12 +128,27 @@ const router = createBrowserRouter([
 ])
 
 class App extends Component {
-    render(){
+	state = {
+		siteInMaintenance: false
+	}
 
+	componentDidMount(){
 		console.log('jQuery version', $.fn.jquery);
-		return (
-			<RouterProvider router={router}/>
-		)
+		const flag = process.env.REACT_APP_MAINTENANCE_MODE === 'true';
+		this.setState((prevState) => {
+			return {
+				...prevState,
+				siteInMaintenance: flag
+			}
+		})
+	}
+
+    render(){
+		if(this.state.siteInMaintenance){
+			return <MaintenancePage/>
+		} else {
+			return <RouterProvider router={router}/>  
+		}
 		
     }
 }

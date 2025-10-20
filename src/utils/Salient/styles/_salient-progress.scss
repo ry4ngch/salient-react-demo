@@ -1,7 +1,7 @@
 :root {
-  --progress-point-color: #d9534f;
-  --progress-bar-fill: #d9534f;
-  --progress-bar-unfill: #ccc;
+  --progress-point-color: hsl(223, 14%, 20%);;
+  --progress-bar-fill: hsl(223, 14%, 20%);;
+  --progress-bar-unfill: rgb(237, 239, 240);
 }
 
 .progress {

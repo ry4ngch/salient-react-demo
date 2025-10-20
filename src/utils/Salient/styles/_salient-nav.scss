@@ -664,6 +664,11 @@ nav li[data-dropdown] ul.dropdown-menu.active-dropdown {
     display: block;
 }
 
+.dropdown-item {
+    width: 100%;
+    box-sizing: border-box;
+}
+
 /** End of Dropdown Menu **/
 
 @media screen and (max-width: 767px){

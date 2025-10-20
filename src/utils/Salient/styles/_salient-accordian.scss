@@ -2,7 +2,6 @@
     display: flex;
     flex-wrap: wrap;
     width: 100%;
-    //max-width: 350px;
     margin: 0 auto;
 }
 .accordian-card {
@@ -87,8 +86,8 @@
     background-color: rgba(0,0,0,0.05);
     overflow: hidden;
     max-height: 0em;
-    transition: max-height .35s ease-in-out, visibility .35s ease-in-out;
-    -o-transition: max-height .35s ease-in-out, visibility .35s ease-in-out;
-    -webkit-transition: max-height .35s ease-in-out, visibility .35s ease-in-out;
+    transition: all .35s ease-in-out;
+    -o-transition: all .35s ease-in-out;
+    -webkit-transition: all .35s ease-in-out;
     visibility: hidden;
 }

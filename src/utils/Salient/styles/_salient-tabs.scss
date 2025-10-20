@@ -14,7 +14,7 @@ $tab-link__vert-padding: 2em;
 @mixin tab-active($active-type: 'box') {
 
     @if $active-type == 'underline' {
-        background-color: #00000020;
+        background-color: rgba(0, 0, 0, 0.12);
         color: $color__main;
         font-weight: bold;
     } @else {
@@ -28,7 +28,6 @@ $tab-link__vert-padding: 2em;
     background: #fff;
     box-shadow: 1px 1px 6px #ccc;
     padding: 1em;
-    //margin: 1em auto;  
 }
 
 .tab-content-wrapper {
@@ -43,13 +42,8 @@ $tab-link__vert-padding: 2em;
     position: relative;
 
     ul {
-        //margin: 0 0 1em 0;
         padding: 0;
         background: $background__main;
-
-        /*li, a {
-            border-radius: .8em;
-        }*/
 
         li {
 
@@ -106,7 +100,6 @@ $tab-link__vert-padding: 2em;
 
 .item {
     margin-bottom: 2px;
-    //background: $background__main;
 
     &::before {
         cursor: pointer;
@@ -146,9 +139,8 @@ $tab-link__vert-padding: 2em;
         &::before {
             content: attr(data-title); // Instead of polluting the HTML with a duplicate set of tabs, we get the accordion using the data-title attribute.
             opacity: 1;
-
-            
         }
+        
         &:not(.active):hover::before {
             background: $background__hover;
             color: $text__hover;
@@ -164,7 +156,7 @@ $tab-link__vert-padding: 2em;
             .item-content {
                 opacity: 1;
                 visibility: visible;
-                max-height:20em;
+                max-height:40em
             }
         }
 
@@ -177,6 +169,16 @@ $tab-link__vert-padding: 2em;
         .item {
             .item-content {
                 transition: max-height .45s linear, opacity .45s linear;
+            }
+        }
+    }
+
+    .tabs-underline + .tab-content-wrapper .item {
+        &.active{
+            &::before {
+                @include tab-active('underline');
+                border-bottom: 2px solid $color__main;
+                transition: border .5s ease; 
             }
         }
     }
@@ -230,7 +232,6 @@ $tab-link__vert-padding: 2em;
             
             .tabs {
                 width: 100%;
-                //float: left;
                 border-right: 1px solid $border__color;
                 padding-right: 1em;
                 padding-bottom: none;

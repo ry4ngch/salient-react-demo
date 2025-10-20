@@ -25,6 +25,7 @@
     "bootstrap": "^5.3.3",
     "bootstrap-table": "^1.23.5",
     "classnames": "^2.5.1",
+    "dotenv": "^17.2.3",
     "jquery": "^3.7.1",
     "normalize.css": "^8.0.1",
     "popper.js": "^1.16.1",
