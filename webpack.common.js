@@ -6,8 +6,11 @@ const dotenv = require('dotenv');
 // Load env vars from .env file
 const env = dotenv.config().parsed || {};
 
+// Merge with process.env for deployment (Vercel, CI/CD, etc.)
+const combinedEnv = { ...process.env, ...env };
+
 // Convert env vars to an object usable by DefinePlugin
-const envKeys = Object.keys(env).reduce((prev, next) => {
+const envKeys = Object.keys(combinedEnv).reduce((prev, next) => {
   prev[`process.env.${next}`] = JSON.stringify(env[next]);
   return prev;
 }, {});
