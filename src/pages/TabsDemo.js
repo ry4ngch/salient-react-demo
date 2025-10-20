@@ -3,6 +3,7 @@ import React, {useState} from 'react'
 // import Salient Library
 import Card, {CardInfo, CardTitle} from '../utils/Salient/UI/Card/Card';
 import Tab, {TabContent, TabItems} from '../utils/Salient/UI/Tab/Tab';
+import Button from '../utils/Salient/UI/Buttons/Button';
 
 const TabsDemo = () => {
     const [isSideTab, setTabType] = useState(false);
@@ -39,6 +40,7 @@ const TabsDemo = () => {
                 <section className="item" data-title="Tab 2">
                     <div className="item-content">
                         Tab 2 content. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede.
+                        <Button type="button" buttonStyle="blueBlur" inverseColor={true} isBlock={true}>This is a Button</Button>
                     </div>
                 </section>
                 <section className="item" data-title="Tab 3">
