@@ -1,6 +1,7 @@
 import React, {useState, useEffect, useRef} from 'react';
+import classNames from 'classnames';
 
-const Progress = ({progressItems = [], className, onProgressPointClick, currentProgressIndex = 0, type='linear', ...rest}) => {
+const Progress = ({progressItems = [], className, onProgressPointClick, currentProgressIndex = 0, type='linear', showProgressStep=false, showCompleteStepCheckmark=false, ...rest}) => {
     const [progressPoint, setProgressPoint] = useState(currentProgressIndex);
     const segmentLength = 100/(progressItems.length-1);
     const [progressBarFill, setProgressBarFill] = useState(currentProgressIndex*segmentLength);
@@ -25,11 +26,17 @@ const Progress = ({progressItems = [], className, onProgressPointClick, currentP
         }
     }, [currentProgressIndex])
 
+    const progressBarClasses = classNames('progress', {
+        'progress-step': showProgressStep,
+        'step-complete-checkmark': showCompleteStepCheckmark,
+        className,
+    })
+
     return (
         <div className="progress-wrapper" ref={progressRef}>
             {
                 type === 'linear' &&
-                <div className={`progress ${className || ''}`} {...rest}>
+                <div className={progressBarClasses} {...rest}>
                     <div className="bar" style={{width: `${totalBarLength}%`}}>
                         <div className="bar__fill" style={{width: progressBarFill+'%'}}></div>
                     </div>
