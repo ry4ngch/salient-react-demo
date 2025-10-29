@@ -4,6 +4,13 @@
   --progress-bar-unfill: rgb(237, 239, 240);
   --progress-point-complete: hsl(223, 14%, 20%);
   --progress-label-color: var(--progress-bar-fill);
+  --progress-circle-stroke-width: 10;
+  --progress-bar-height: 10px;
+}
+
+.progress-point-enabled {
+  --progress-circle-stroke-width: 5;
+  --progress-bar-height: 5px;
 }
 
 .progress {
@@ -21,8 +28,8 @@
   left: 50%;
   background: var(--progress-bar-unfill);
   width: 100%;
-  height: 3px;
-  border-radius: 10px;
+  height: var(--progress-bar-height);
+  border-radius: calc(2*var(--progress-bar-height));
   transform: translate(-50%, -50%);
   
   &__fill {
@@ -30,6 +37,35 @@
     background: var(--progress-bar-fill);
     height: 100%;
     transition: all .2s ease-in;
+    border-radius: calc(2*var(--progress-bar-height));
+  }
+}
+
+.progress.circular.progress-step {
+  margin-top: 1em;
+}
+
+.progress.progress-step .progress-ring-dot {
+  width: 2rem;
+  height: 2rem;
+  counter-increment: steps;
+
+  &.point--complete,
+  &.point--active {
+    color: var(--progress-point-incomplete);
+  }
+
+  &::before {
+      content: counter(steps);
+      font-weight: 500;
+      left: 50%;
+      top: 50%;
+      position: absolute;
+      -webkit-transform: translateX(-50%) translateY(-50%);
+      -moz-transform: translateX(-50%) translateY(-50%);
+      -ms-transform: translateX(-50%) translateY(-50%);
+      -o-transform: translateX(-50%) translateY(-50%);
+      transform: translateX(-50%) translateY(-50%);
   }
 }
 
@@ -67,6 +103,13 @@
   }
 }
 
+.progress.progress-step.step-complete-checkmark .progress-ring-dot {
+  &.point--active::before,
+  &.point--complete::before {
+    content: '\2713'
+  }
+}
+
 .point {
   position: relative;
   color: var(--progress-label-color);
@@ -99,8 +142,8 @@
   z-index: 1;
   position: absolute;
   background: var(--progress-point-incomplete);
-  width: 1rem;
-  height: 1rem;
+  width: 1em;
+  height: 1em;
   border-radius: 100%;
   transition: 0.3s ease;
   top: 50%;
@@ -110,8 +153,12 @@
   .point--complete &,
   .point--active & {
     background: var(--progress-point-complete);
-    /*box-shadow: 0 2px 4px rgba(#000, 0.2),
-                0 0 0 3px var(--progress-point-color);*/
+  }
+
+  .point--active & {
+    outline: 3px solid var(--progress-point-incomplete);
+    box-shadow: 0 2px 4px rgba(#000, 0.2),
+                0 0 0 4px var(--progress-point-complete);
   }
 }
 
@@ -150,18 +197,18 @@
 .progress-ring-circle-bg {
   fill: none;
   stroke: var(--progress-bar-unfill);
-  stroke-width: 8;
+  stroke-width: var(--progress-circle-stroke-width);
 }
 
 .progress-ring-circle {
   fill: none;
   stroke: var(--progress-bar-fill);
-  stroke-width: 8;
-  transition: stroke-dashoffset 0.5s ease;
+  stroke-width: var(--progress-circle-stroke-width);
+  transition: stroke-dashoffset 0.2s ease;
   stroke-linecap: round;
 
   &:hover {
-    stroke-width: 10;
+    stroke-width: calc(var(--progress-circle-stroke-width)*1.1);
   }
 }
 
@@ -171,4 +218,33 @@
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
+}
+
+.progress-ring-dot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  place-items: center;
+  transition: 0.5s ease;
+  width: 1em;
+  height: 1em;
+  transform: translateX(calc(-50% + var(--XOffset))) translateY(calc(-50% + var(--YOffset)));
+  -webkit-transform: translateX(calc(-50% + var(--XOffset))) translateY(calc(-50% + var(--YOffset)));
+  -moz-transform: translateX(calc(-50% + var(--XOffset))) translateY(calc(-50% + var(--YOffset)));
+  -ms-transform: translateX(calc(-50% + var(--XOffset))) translateY(calc(-50% + var(--YOffset)));
+  -o-transform: translateX(calc(-50% + var(--XOffset))) translateY(calc(-50% + var(--YOffset)));
+  border-radius: 50%;
+  background-color: var(--progress-point-incomplete);
+
+  &.point--complete,
+  &.point--active {
+    background: var(--progress-point-complete);
+  }
+
+  &.point--active {
+    outline: 3px solid var(--progress-point-incomplete);
+    box-shadow: 0 2px 4px rgba(#000, 0.2),
+                0 0 0 4px var(--progress-point-complete);
+  }
 }

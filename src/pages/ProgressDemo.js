@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import Progress from "../utils/Salient/UI/Progress/Progress";
 import Card, {CardInfo, CardContent, CardTitle} from '../utils/Salient/UI/Card/Card';
 import Banner from '../utils/Salient/UI/Banner/Banner';
@@ -9,6 +9,7 @@ const ProgressDemo = () => {
     const [currentProgressIndex, setCurrentProgressIndex] = useState(2);
     const [showCheckmark, setShowCheckmark] = useState(false);
     const [showProgressStep, setShowProgressStep] = useState(false);
+    const [showProgressPoint, setShowProgressPoint] = useState(false);
 
     const progressItems = ['Milestone 1', 'Milestone 2', 'Milestone 3', 'Milestone 4', 'Milestone 5', 'Milestone 6'];
 
@@ -29,6 +30,7 @@ const ProgressDemo = () => {
     const onProgressPointClick = (index) => {
         setCurrentProgressIndex(index);
     }
+
     return (
         <React.Fragment>
             <Banner blockquoteStyle={true} theme="cancel">
@@ -47,15 +49,22 @@ const ProgressDemo = () => {
                             </select>
                         </div>
                         <div>
+                            <label>Show Progress Point: </label>
+                            <select value={showProgressPoint} onChange={() => setShowProgressPoint((prevState) => !prevState)}>
+                                <option value="true">True</option>
+                                <option value="false">False</option>
+                            </select>
+                        </div>
+                        <div>
                             <label>Show Progress Step: </label>
-                            <select value={showProgressStep} onChange={() => setShowProgressStep((prevState) => !prevState)} disabled={progressType !== 'linear'}>
+                            <select value={showProgressStep} onChange={() => setShowProgressStep((prevState) => !prevState)} disabled={!showProgressPoint}>
                                 <option value="true">True</option>
                                 <option value="false">False</option>
                             </select>
                         </div>
                         <div>
                             <label>Show Checkmark: </label>
-                            <select value={showCheckmark} onChange={() => setShowCheckmark((prevState) => !prevState)} disabled={progressType !== 'linear' || !showProgressStep}>
+                            <select value={showCheckmark} onChange={() => setShowCheckmark((prevState) => !prevState)} disabled={!showProgressStep || !showProgressPoint}>
                                 <option value="true">True</option>
                                 <option value="false">False</option>
                             </select>
@@ -67,6 +76,7 @@ const ProgressDemo = () => {
                         progressItems={progressItems}
                         currentProgressIndex={currentProgressIndex}
                         type={progressType}
+                        showProgressPoint={showProgressPoint}
                         onProgressPointClick={onProgressPointClick}
                         showProgressStep={showProgressStep}
                         showCompleteStepCheckmark={showCheckmark}/>
