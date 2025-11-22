@@ -1,8 +1,7 @@
 import React, {useState, useEffect, useRef} from 'react';
 import classNames from 'classnames';
 
-const Progress = ({progressItems = [], className, onProgressPointClick, currentProgressIndex = 0, type='linear', showProgressPoint=false, showProgressStep=false, showCompleteStepCheckmark=false, ...rest}) => {
-    const [progressPoint, setProgressPoint] = useState(currentProgressIndex);
+const Progress = ({progressItems = [], className, onProgressPointClick, currentProgressIndex = 0, type='linear', showProgressPoint=false, showProgressStep=false, showCompleteStepCheckmark=false, theme, circularProgressSubheading='Complete', ...rest}) => {
     const segmentLength = 100/(progressItems.length-1);
     const [progressBarFill, setProgressBarFill] = useState(currentProgressIndex*segmentLength);
     const totalBarLength = (100/progressItems.length)*(progressItems.length-1);
@@ -13,7 +12,6 @@ const Progress = ({progressItems = [], className, onProgressPointClick, currentP
     const progressRef = useRef(null);
 
     const clickHandler = (index) => {
-        setProgressPoint(index);
         setProgressBarFill(index*segmentLength);
 
         if(onProgressPointClick){
@@ -32,8 +30,8 @@ const Progress = ({progressItems = [], className, onProgressPointClick, currentP
         'step-complete-checkmark': showCompleteStepCheckmark,
         'progress-point-enabled': showProgressPoint,
         'circular': type === 'circular',
-        className,
-    })
+        [`progress-theme-${theme}`]: theme,
+    },  className)
 
     return (
         <div className="progress-wrapper" ref={progressRef}>
@@ -44,9 +42,9 @@ const Progress = ({progressItems = [], className, onProgressPointClick, currentP
                         <div className="bar__fill" style={{width: progressBarFill+'%'}}></div>
                     </div>
                     {progressItems.map((item, index) => (
-                        <div key={index} className={`point ${progressPoint == index ? 'point--active' : (index < progressPoint ? 'point--complete' : '')}`}  onClick={() => clickHandler(index)} style={{width: `${segmentLength}%`}}>
+                        <div key={index} className={`point ${currentProgressIndex == index ? 'point--active' : (index < currentProgressIndex ? 'point--complete' : '')}`}  style={{width: `${segmentLength}%`}}>
                             <label className="label">{item}</label>
-                            {showProgressPoint && <div className="bullet"></div>}
+                            {showProgressPoint && <div className="bullet" onClick={() => clickHandler(index)}></div>}
                         </div>
                     ))}
                     
@@ -60,26 +58,27 @@ const Progress = ({progressItems = [], className, onProgressPointClick, currentP
                         <circle className="progress-ring-circle-bg" cx="100" cy="100" r={circularRadius}/>
                         <circle className="progress-ring-circle" cx="100" cy="100" r={circularRadius} strokeDasharray={`${circumference} ${circumference}`} strokeDashoffset={offset}/>
                     </svg>
-                    {showProgressPoint && progressItems.slice(0, -1).map((item, index) => {
-                        const angle = index * angleBetweenPoint - Math.PI / 2;
+                    {showProgressPoint && progressItems.slice(0, -1).map((_, index) => {
+                        const angle = (index * angleBetweenPoint - Math.PI / 2);
                         const xOffset = circularRadius * Math.cos(angle);
                         const yOffset = circularRadius * Math.sin(angle);
                         return (
                         <div
-                            className={`progress-ring-dot ${progressPoint == index ? 'point--active' : (index < progressPoint ? 'point--complete' : '')}`}
+                            className={`progress-ring-dot ${currentProgressIndex == index ? 'point--active' : (index < currentProgressIndex ? 'point--complete' : '')}`}
                             key={index}
                             style={{
                             '--XOffset': `${xOffset}px`,
                             '--YOffset': `${yOffset}px`,
                             }}
+                            onClick={() => clickHandler(index)}
                         ></div>
                         );
                     })}
                     <div className="progress-content">
                         <div className="progress-percentage">{progressBarFill}%</div>
                         <div className="progress-label">
-                            Complete
-                            <p>{progressItems[progressPoint]}</p>
+                            {circularProgressSubheading}
+                            <p>{progressItems[currentProgressIndex]}</p>
                         </div>
                     </div>
                 </div>

@@ -19,6 +19,7 @@ const NavigateContext = React.createContext({
         {name: 'Progress', link: '/progress'},
         {name: 'Chart', link: '/chart'},
         {name: 'Grid', link: '/grid'},
+        {name: 'Toolbar', link: '/toolbar'},
     ],
 })
 

@@ -8,6 +8,7 @@ import FormAffix from '../utils/Salient/UI/Form/FormAffix';
 import NumericField from '../utils/Salient/UI/Form/NumericField';
 import TextField from '../utils/Salient/UI/Form/TextField';
 import RangeSlider from '../utils/Salient/UI/Form/RangeSlider';
+import Grid, {GridRow, GridItem} from '../utils/Salient/UI/Grid/Grid';
 
 const FormUIsDemo = () => {
   const testNumericFieldCallback = (returnVal) => {
@@ -69,16 +70,22 @@ const FormUIsDemo = () => {
                     <CardTitle>Form Controls - Numeric Field</CardTitle>
                 </CardInfo>
                 <CardContent>
-                    <CardTitle>Side Placement</CardTitle>
-                    <NumericField min={1} max={20} value={5} step={.01} fieldName="Items Per Page" enableSuggestion={true} suggestionLimit={5} callbackFn={testNumericFieldCallback} ref={testRef} fieldControlPlacement="side"/>
-                </CardContent>
-                <CardContent>
-                    <CardTitle>Top Placement</CardTitle>
-                    <NumericField min={1} max={20} value={5} step={.01} fieldName="Items Per Page" enableSuggestion={true} suggestionLimit={5} callbackFn={testNumericFieldCallback} ref={testRef} fieldControlPlacement="top"/>
-                </CardContent>
-                <CardContent>
-                    <CardTitle>Bottom Placement</CardTitle>
-                    <NumericField min={1} max={20} value={5} step={.01} fieldName="Items Per Page" enableSuggestion={true} suggestionLimit={5} callbackFn={testNumericFieldCallback} ref={testRef} fieldControlPlacement="bottom"/>
+                    <Grid>
+                        <GridRow>
+                            <GridItem>
+                                <CardTitle>Side Placement</CardTitle>
+                                <NumericField min={1} max={20} value={5} step={.01} fieldName="Items Per Page" enableSuggestion={true} suggestionLimit={5} callbackFn={testNumericFieldCallback} ref={testRef} fieldControlPlacement="side"/>
+                            </GridItem>
+                            <GridItem>
+                                <CardTitle>Top Placement</CardTitle>
+                                <NumericField min={1} max={20} value={5} step={.01} fieldName="Items Per Page" enableSuggestion={true} suggestionLimit={5} callbackFn={testNumericFieldCallback} ref={testRef} fieldControlPlacement="top"/>
+                            </GridItem>
+                            <GridItem>
+                                <CardTitle>Bottom Placement</CardTitle>
+                                <NumericField min={1} max={20} value={5} step={.01} fieldName="Items Per Page" enableSuggestion={true} suggestionLimit={5} callbackFn={testNumericFieldCallback} ref={testRef} fieldControlPlacement="bottom"/>
+                            </GridItem>
+                        </GridRow>
+                    </Grid>
                 </CardContent>
             </Card>
 

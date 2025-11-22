@@ -35,6 +35,7 @@ import Table2 from './components/TestTables/Table2';
 import ChartDemo from './pages/ChartDemo';
 import GridDemo from './pages/GridDemo';
 import MaintenancePage from './Maintenance';
+import ToolbarDemo from './pages/ToolbarDemo';
 
 // import Navigate Provider context
 import { AppProvider } from './store/navigate-context';
@@ -121,6 +122,10 @@ const router = createBrowserRouter([
 			{
 				path: '/grid',
 				element: <GridDemo/>
+			},
+			{
+				path: '/toolbar',
+				element: <ToolbarDemo/>
 			},
 
 		]

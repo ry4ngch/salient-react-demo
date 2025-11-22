@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import classNames from 'classnames';
 
-const Nav = ({shift=true, navSlideDown=false, brandLogo, title, children, theme, ...rest}) => {
+const Nav = ({shift=true, navSlideDown=false, brandLogo, title, children, theme, className, ...rest}) => {
   const [isNavCollapsed, setIsNavCollapsed] = useState(true);
   const [isSearchVisible, setIsSearchVisible] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
@@ -56,7 +56,8 @@ const Nav = ({shift=true, navSlideDown=false, brandLogo, title, children, theme,
     { 
       "sd-shift-navbar": shift && !navSlideDown && !isNavCollapsed,
       [theme+"-scheme"]: theme 
-    }
+    },
+    className,
   );
 
   return (
@@ -64,7 +65,7 @@ const Nav = ({shift=true, navSlideDown=false, brandLogo, title, children, theme,
       <div id="overlay" ref={overlayRef} className={isNavCollapsed ? '' : 'overlay'}></div>
       <nav 
         {...rest} 
-        className={`${navClasses} ${rest.className}`.trim()} 
+        className={navClasses} 
         {...(shift && !navSlideDown ? { 'data-effect': 'shift' } : {})}>
         <div className={classNames("hamburger", { "active": !isNavCollapsed })} onClick={handleHamburgerClick}>
           <div></div>
@@ -90,17 +91,18 @@ const Nav = ({shift=true, navSlideDown=false, brandLogo, title, children, theme,
 };
 
 // Note: All the props in NavMenu is passed down from Nav
-const NavMenu = ({isNavCollapsed, navSlideDown = false, children, handleDropdownClick, handleSearchToggle, activeDropdown, isSearchVisible, ...rest}) => {
+const NavMenu = ({isNavCollapsed, navSlideDown = false, children, handleDropdownClick, handleSearchToggle, activeDropdown, isSearchVisible, className, ...rest}) => {
     const navListClasses = classNames(
       'navlinks',
       { 'nav-collapse': isNavCollapsed },
       { 'sd-slide-in': !navSlideDown },
-      { 'sd-slide-down': navSlideDown }
+      { 'sd-slide-down': navSlideDown },
+      className,
     );
   
     return (
-      <>
-        <ul {...rest} className={navListClasses} ref={rest.ref}>
+      <div className={navListClasses}>
+        <ul {...rest} className="navCollections" ref={rest.ref}>
           {React.Children.map(children, (child, index) => (
             React.isValidElement(child) && child.props['data-dropdown'] !== undefined ? (
               React.cloneElement(child, {
@@ -127,10 +129,10 @@ const NavMenu = ({isNavCollapsed, navSlideDown = false, children, handleDropdown
           onClick={handleSearchToggle}
         ></div>
         <div className={classNames('search-box', { hide: !isSearchVisible })}>
-          <i className="search"></i>
+          <i className="search" onClick={handleSearchToggle}></i>
           <input type="text" placeholder="Search here..." />
         </div>
-      </>
+      </div>
     );
   };
 

@@ -10,6 +10,7 @@ const ProgressDemo = () => {
     const [showCheckmark, setShowCheckmark] = useState(false);
     const [showProgressStep, setShowProgressStep] = useState(false);
     const [showProgressPoint, setShowProgressPoint] = useState(false);
+    const [progressThemeColor, setProgressThemeColor] = useState('');
 
     const progressItems = ['Milestone 1', 'Milestone 2', 'Milestone 3', 'Milestone 4', 'Milestone 5', 'Milestone 6'];
 
@@ -49,6 +50,15 @@ const ProgressDemo = () => {
                             </select>
                         </div>
                         <div>
+                            <label>Progress Theme Color: </label>
+                            <select value={progressThemeColor} onChange={(event) => setProgressThemeColor(event.target.value)}>
+                                <option value="">Default</option>
+                                <option value="dark">Dark</option>
+                                <option value="sunset">Sunset</option>
+                                <option value="forest">Forest</option>
+                            </select>
+                        </div>
+                        <div>
                             <label>Show Progress Point: </label>
                             <select value={showProgressPoint} onChange={() => setShowProgressPoint((prevState) => !prevState)}>
                                 <option value="true">True</option>
@@ -79,7 +89,9 @@ const ProgressDemo = () => {
                         showProgressPoint={showProgressPoint}
                         onProgressPointClick={onProgressPointClick}
                         showProgressStep={showProgressStep}
-                        showCompleteStepCheckmark={showCheckmark}/>
+                        showCompleteStepCheckmark={showCheckmark}
+                        theme={progressThemeColor}
+                        />
                     <div className="progress-btn-group">
                         <Button type="button" buttonStyle="clear" inverseColor={true} onClick={() => updateProgress(-1)}>Previous</Button>
                         <Button type="button" buttonStyle="clear" inverseColor={true} onClick={() => updateProgress(+1)}>Next</Button>

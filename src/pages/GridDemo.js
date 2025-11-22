@@ -3,7 +3,7 @@ import Grid, {GridRow, GridItem} from '../utils/Salient/UI/Grid/Grid';
 
 const GridDemo = () => {
     return (
-        <Grid>
+        <Grid className='grid-demo'>
             <GridRow>
                 <GridItem>Row 1 - Item 1</GridItem>
                 <GridItem>Row 1 - Item 2</GridItem>

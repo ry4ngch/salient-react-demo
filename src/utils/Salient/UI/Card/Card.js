@@ -1,13 +1,13 @@
 import React, {useState, useEffect} from "react";
 import classNames from "classnames";
 
-const Card = (props) => {
+const Card = ({children, className, animation, ...rest}) => {
     const cardClasses = classNames('card', {
-        'card_tilt': props.animation == 'tilt',
-        'card_flipX': props.animation == 'flip-x',
-        'card_flipY': props.animation == 'flip-y',
-        'card_scale': props.animation == 'scale'
-    })
+        'card_tilt': animation == 'tilt',
+        'card_flipX': animation == 'flip-x',
+        'card_flipY': animation == 'flip-y',
+        'card_scale': animation == 'scale',
+    }, className)
 
     const [gridState, setGridState] = useState(false);
     const rows = 10;
@@ -16,11 +16,11 @@ const Card = (props) => {
     const cells = Array.from({ length: rows * cols });
 
     useEffect(() => {
-        setGridState(props.animation == 'tilt');
-    }, [props.animation])
+        setGridState(animation == 'tilt');
+    }, [animation])
   
     return (
-        <div className={[cardClasses, props.className || ''].join(' ').trim()} style={props.animation === 'tilt' ? {'--rows': rows, '--cols': cols, ...props.style} : {...props.style}}>
+        <div {...rest} className={cardClasses} style={animation === 'tilt' ? {'--rows': rows, '--cols': cols, ...rest.style} : {...rest.style}}>
             {gridState && (
                 <div className="tracker__cells" aria-hidden="true">
                     {cells.map((_, index) => (
@@ -28,37 +28,32 @@ const Card = (props) => {
                     ))}
                 </div>
             )}
-            {gridState ? <div className="card-grid">{props.children}</div> : props.children}
+            {gridState ? <div className="card-grid">{children}</div> : children}
       </div>
     );
   
 }
 
-const CardInfo = (props) => {
-    const { justify, children, ...rest } = props;
+const CardInfo = ({justify=false, className, children, ...rest}) => {
     return(
-        <div {...rest} className={['card-info', props.className || ''].join(' ').trim()}>
+        <div {...rest} className={['card-info', className || ''].join(' ').trim()}>
             {justify ? (<div className="card-justify">{children}</div>) : (children)}
         </div>
     )
 }
 
-CardInfo.defaultProps = {
-    justify: false
-}
-
-const CardContent = (props) => {
+const CardContent = ({className, children, ...rest}) => {
     return(
-        <div {...props} className={['card-content', props.className || ''].join(' ').trim()}>
-            {props.children}
+        <div {...rest} className={['card-content', className || ''].join(' ').trim()}>
+            {children}
         </div>
     )
 }
 
-const CardTitle = (props) => {
+const CardTitle = ({className, children, ...rest}) => {
     return(
-        <div className={['card__title', props.className || ''].join(' ').trim()}>
-            {props.children}
+        <div {...rest} className={['card__title', className || ''].join(' ').trim()}>
+            {children}
         </div>
     )
 }

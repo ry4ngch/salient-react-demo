@@ -7,6 +7,7 @@ const dummy_data = [
     {label: 'Feb', value: 50},
     {label: 'Mar', value: 10},
     {label: 'April', value: 40},
+    {label: 'May', value: 90},
     {label: 'Jun', value: 60},
     {label: 'July', value: 120},
     {label: 'Aug', value: 84},
