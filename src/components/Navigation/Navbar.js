@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
     const ctx = useContext(NavigateContext);
-    const [navbarTheme, setNavbarTheme] = useState('gray');
+    const [navbarTheme, setNavbarTheme] = useState('dark');
     const navbarThemesSet = ['gray', 'offwhite', 'dark', 'blue', 'navy'];
     const navigate = useNavigate();
 

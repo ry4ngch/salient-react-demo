@@ -101,8 +101,8 @@ const NavMenu = ({isNavCollapsed, navSlideDown = false, children, handleDropdown
     );
   
     return (
-      <div className={navListClasses}>
-        <ul {...rest} className="navCollections" ref={rest.ref}>
+      <div {...rest} className={navListClasses}>
+        <ul className="navCollections" ref={rest.ref}>
           {React.Children.map(children, (child, index) => (
             React.isValidElement(child) && child.props['data-dropdown'] !== undefined ? (
               React.cloneElement(child, {

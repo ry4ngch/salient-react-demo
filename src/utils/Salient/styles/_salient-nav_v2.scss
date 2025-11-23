@@ -158,9 +158,6 @@ nav.navy-scheme .hamburger.active div{
 /* Brand */
 .navbar-brand {
     position: relative;
-    //top: 50%;
-    //transform: translateY(-50%);
-    //vertical-align: middle;
     height: 100%;
     cursor: pointer;
 }
@@ -191,19 +188,6 @@ nav.navy-scheme .hamburger.active div{
     transform: translate(-50%, -50%);
 }
 
-// .navbar-brand span::before,
-// .navbar-brand span::after {
-//     display: inline-block;
-//     vertical-align: middle;
-//     content: "";
-//     height:100%;
-// }
-
-// .navbar-brand:before {
-//     content: "";
-//     display: table;
-//     clear: both;
-// }
 
 /* Search Icon */
 
@@ -305,7 +289,6 @@ nav.navy-scheme .arrow-left:after{
     top: 0;
     left: 0;
     right: 0;
-    //height: $navbar-height;
     padding: $navbar-vert-pad 20px;
     background: $navbar-default-bgcolor;
     z-index: 999;
@@ -337,7 +320,6 @@ nav.navy-scheme {
     display: inline-block;
     float: none;
     list-style: none;
-    //vertical-align: middle;
     text-decoration: none;
 }
 
@@ -438,11 +420,6 @@ nav.blue-scheme .search-box .search:after {
     border-color: $navbar-blue-bgcolor;
 }
 
-nav.navy-scheme .search-box .search:before,
-nav.navy-scheme .search-box .search:after {
-    border-color: $navbar-navy-bgcolor;
-}
-
 .search-box input {
     height: 80%;
     width: 100%;
@@ -491,43 +468,41 @@ nav.navy-scheme .search-box input {
 /* Navlinks */
 
 .navlinks li {
-    //padding: 15px;
     cursor: pointer;
 }
 
 .navlinks li a,
-.navbar-brand span {
+.navbar-brand * {
     color: $navbar-default-color;
 }
 
 .navlinks li a {
     text-decoration: none;
     padding: 15px;
-    //height: 15px;
 }
 
 nav.dark-scheme .navlinks li a,
-nav.dark-scheme .navbar-brand span {
+nav.dark-scheme .navbar-brand * {
     color: $navbar-dark-color;
 }
 
 nav.offwhite-scheme .navlinks li a,
-nav.offwhite-scheme .navbar-brand span {
+nav.offwhite-scheme .navbar-brand * {
     color: $navbar-offwhite-color;
 }
 
 nav.grayscale-scheme .navlinks li a,
-nav.grayscale-scheme .navbar-brand span {
+nav.grayscale-scheme .navbar-brand * {
     color: $navbar-grayscale-color;
 }
 
 nav.blue-scheme .navlinks li a,
-nav.blue-scheme .navbar-brand span {
+nav.blue-scheme .navbar-brand * {
     color: $navbar-blue-color;
 }
 
 nav.navy-scheme .navlinks li a,
-nav.navy-scheme .navbar-brand span {
+nav.navy-scheme .navbar-brand * {
     color: $navbar-navy-color;
 }
 
@@ -674,12 +649,10 @@ nav li[data-dropdown] ul.dropdown-menu.active-dropdown {
 
 @media screen and (max-width: 767px){
     .nav-collapse {
-        //opacity: 0;
         pointer-events: none;
     }
 
     .sd-slide-in.nav-collapse {
-        //display: none;
         width: 0;
         visibility: hidden;
         left: -100%;
@@ -687,7 +660,7 @@ nav li[data-dropdown] ul.dropdown-menu.active-dropdown {
 
     .sd-slide-down.nav-collapse {
         height: 0;
-        max-height: 0; //added 
+        max-height: 0;
         visibility: hidden;
         top: -100%;
     }
@@ -699,8 +672,7 @@ nav li[data-dropdown] ul.dropdown-menu.active-dropdown {
 
     .sd-slide-in:not(.nav-collapse){
         background-color: $navbar-default-bgcolor;
-        //opacity: 1;
-        transition: 0.2s width ease-in-out;
+        transition: 0.2s left ease-in-out;
         pointer-events: auto;
         width: 60%;
         left: 0;
@@ -734,7 +706,6 @@ nav li[data-dropdown] ul.dropdown-menu.active-dropdown {
 
     .sd-slide-down:not(.nav-collapse){
         background-color: $navbar-default-bgcolor;
-        //opacity: 1;
         transition: 0.2s max-height ease-in-out;
         pointer-events: auto;
         left: 0;
@@ -773,11 +744,9 @@ nav li[data-dropdown] ul.dropdown-menu.active-dropdown {
         padding-top: $navbar-padding-top;
         right: 0;
         max-height: 100%;
-        //margin: 0 auto;
     }
 
     .sd-slide-down .search-box {
-        // top: 50%;
         transform: translateY(-50%);
     }
 
@@ -819,7 +788,6 @@ nav li[data-dropdown] ul.dropdown-menu.active-dropdown {
     }
 
     .active + .navbar-brand span {
-        //display: table-cell;
         vertical-align: middle;
     }
 
@@ -843,15 +811,7 @@ nav li[data-dropdown] ul.dropdown-menu.active-dropdown {
         position: static !important;
         border-right: none !important;
         border-left: none !important;
-        // opacity: 0;
-        // height: 0;
-        // transition: opacity 3s ease;
     }
-
-    // ul.dropdown-menu.active-dropdown {
-    //     opacity: 1;
-    //     height: auto;
-    // }
 
 }
 
@@ -862,18 +822,8 @@ nav li[data-dropdown] ul.dropdown-menu.active-dropdown {
     }
 
     .navbar .search-box {
-        // top: 50%;
-        // transform: translateY(-50%);
         width: 100%;
-        // float: right;
-        // margin-right: 65px;
-    }
-
-    .navlinks {
-        //top: 50%;
-        // position: relative;
-        //transform: translateY(-50%);
-        //vertical-align: middle;
+        border-radius: 0;
     }
 }
 
