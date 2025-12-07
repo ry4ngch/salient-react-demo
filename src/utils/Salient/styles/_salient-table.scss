@@ -26,8 +26,49 @@ table.sl-table {
     background-color: rgb(243 244 246);
 }
 
-.sl-table.table-draggable {
-    cursor: grab;
+.sl-table .drag-handle {
+  width: 20px;
+  padding: 0;
+  height: 100%;
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* Icon wrapper (the span inside) */
+.sl-table .drag-handle > * {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: grab;
+  background: #ddd;
+  opacity: 0.6;
+  transition: opacity 0.15s ease;
+
+  &:active {
+    cursor: grabbing;
+  }
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.sl-table .table-row-dragging {
+  opacity: 1 !important;
+  background: white;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19),
+              0 6px 6px rgba(0,0,0,0.23);
+  transition: all 0.1s ease;
+  z-index: 1000;
 }
 
 .sl-table th {
@@ -69,7 +110,7 @@ table.sl-table {
   display: inline-block;
   padding: 6px 12px;
   margin-bottom: 0;
-  font-size: 14px;
+  font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
   text-align: center;
@@ -125,7 +166,7 @@ table.sl-table {
   float: left;
   min-width: 160px;
   margin: 2px 0 0;
-  font-size: 14px;
+  font-size: 1rem;
   text-align: left;
   list-style: none;
   background-color: #fff;
@@ -365,6 +406,55 @@ table.sl-table {
   }
 }
 
+/** Ghost View on drag **/
+/* Wrapper shown as the drag image (apply background, shadow, scale etc) */
+.sl-drag-ghost {
+  position: absolute;        /* required for setDragImage usage */
+  top: -9999px;
+  left: -9999px;
+  pointer-events: none;
+  z-index: 99999;
+
+  background: white;
+  border-radius: 6px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+
+  /* small pop/scale so it looks elevated */
+  transform: scale(1.02);
+  transition: transform 120ms ease, opacity 120ms ease;
+  opacity: 1;
+  overflow: hidden;
+  display: inline-block; /* wrapper behaves like a block fitting the cloned row */
+}
+
+/* Ensure the cloned row's display / width behave like a table row */
+.sl-drag-ghost tr {
+  display: table-row;
+  width: 100%;
+  background: transparent; /* or inherit */
+}
+
+/* Ensure cloned td behave like table-cells */
+.sl-drag-ghost td {
+  display: table-cell;
+  vertical-align: middle;
+  padding: 8px 12px; /* adjust to match your table cell padding */
+  box-sizing: border-box;
+}
+
+/* If you want to hide certain children in the ghost (like complex controls) */
+.sl-drag-ghost .hide-in-ghost {
+  display: none !important;
+}
+
+/* The small "lift" animation applied to the real row while dragging */
+.sl-row-dragging {
+  opacity: 0.65;
+  transform: scale(1.01);
+  transition: transform 120ms ease, opacity 120ms ease;
+}
+
+
 /** Grid View **/
 table.gridView tbody {
   display: flex;
@@ -431,43 +521,111 @@ table.gridView td {
 }
 
 @media screen and (max-width: 767px) {
-    table.sl-table thead {
-      border: none;
-      clip: rect(0 0 0 0);
-      height: 1px;
-      margin: -1px;
-      overflow: hidden;
-      padding: 0;
-      position: absolute;
-      width: 1px;
-    }
-    
-    table.sl-table tr {
-      border-bottom: 1px solid #ddd;
-      display: block;
-      margin-bottom: .625em;
-    }
-    
-    table.sl-table td {
-      display: block;
-      text-align: right;
-    }
-    
-    table.sl-table td::before {
-      content: attr(data-field);
-      float: left;
-      font-weight: bold;
-      text-transform: uppercase;
-    }
-    
-    table.sl-table td:last-child {
-      border-bottom: 0;
-    }
+  :root {
+    --grip-width: 20px;
+  }
 
-    .pagination-info {
-      display: none;
+  /* hide the table header (existing) */
+  table.sl-table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+
+  /* make each row a block "card" */
+  table.sl-table tr {
+    display: block;               /* behave like a card */
+    position: relative;           /* anchor for absolute drag handle */
+    margin-bottom: .75em;
+    border-bottom: 1px solid #ddd;
+    padding-left: var(--grip-width);           /* leave space for the left strip */
+    box-sizing: border-box;
+  }
+
+  /* --- left vertical drag handle strip ---
+     placed absolutely so it spans full height of the card
+  */
+  table.sl-table td.drag-handle {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;                   /* full height of the row */
+    width: var(--grip-width);                 /* fixed strip width; matches padding-left */
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    background: #f5f5f5;
+    border-right: 1px solid #e5e5e5;
+    z-index: 2;
+    box-sizing: border-box;
+    /* optional aesthetic */
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    > * {
+      position: relative;
     }
   }
+
+  /* style icon inside the drag handle */
+  table.sl-table td.drag-handle span {
+    pointer-events: auto;
+  }
+
+  /* ensure all other cells stack vertically in the right column */
+  table.sl-table td:not(.drag-handle) {
+    display: block;            /* each cell is its own row inside the card */
+    width: 100%;
+    text-align: right;
+    padding: 8px 12px;
+    box-sizing: border-box;
+    background: transparent;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* label for each stacked cell (left of its content) */
+  table.sl-table td:not(.drag-handle)::before {
+    content: attr(data-field);
+    float: left;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-right: 8px;
+    color: #333;
+  }
+
+  /* remove bottom border for the last stacked cell if needed */
+  table.sl-table td:last-child {
+    border-bottom: 0;
+  }
+
+  /* example hover/drop highlight */
+  table.sl-table tr.row-insert-highlight {
+    outline: 2px dashed #3aa0ff;
+  }
+
+  /* dragged row visual (applied with sortable-drag or activeDragRow class) */
+  table.sl-table tr.sortable-drag {
+    box-shadow: 0 10px 20px rgba(0,0,0,0.18), 0 6px 6px rgba(0,0,0,0.12);
+    background: white;
+    transform: translateZ(0);
+    z-index: 999;
+  }
+
+  .pagination-info {
+    display: none;
+  }
+}
+
+
+
   
   @media screen and (max-width: 640px){
     .pagination-footer {

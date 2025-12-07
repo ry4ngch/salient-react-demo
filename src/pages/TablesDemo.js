@@ -6,7 +6,7 @@ import {docs} from '../containers/demo_data';
 
 // import Salient Library
 import Card, {CardInfo, CardContent, CardTitle} from '../utils/Salient/UI/Card/Card';
-import Table, {TableRow} from '../utils/Salient/UI/Table/Table';
+import Table, {TableRow} from '../utils/Salient/UI/Table/TableV2';
 import withPagination from '../utils/Salient/UI/Pagination/withPagination';
 
 // Import Components Build with Salient

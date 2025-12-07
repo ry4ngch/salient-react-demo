@@ -1,5 +1,5 @@
 import React, {useRef, useEffect} from "react";
-import Table, {TableRow} from "../../utils/Salient/UI/Table/Table";
+import Table, {TableRow} from "../../utils/Salient/UI/Table/TableV2";
 
 const SampleStaticTable = () => {
     const handleRetrievedRows = (returnData) => {

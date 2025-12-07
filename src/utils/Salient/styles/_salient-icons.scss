@@ -625,3 +625,47 @@ $arrow-head-width: calc($arrow-line-width * 4);
 .icon-bottom-fill::before {
     transform: translateX(-50%) rotate(-135deg);
 }
+
+/** icon grip **/
+.icon-drag {
+    --dot-size: 4px; /* default dot size */
+    --spacing: 6px;  /* default spacing between dots */
+  
+    width: 20px;     /* total icon width */
+    height: 20px;    /* total icon height */
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: inherit; /* grip color */
+  }
+  
+  .icon-drag::before {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+  
+    /* calculate dot size based on icon size, fallback to 4px */
+    width: var(--dot-size, 4px);
+    height: var(--dot-size, 4px);
+    background-color: currentColor;
+  
+    /* spacing variable */
+    --s: var(--spacing, 6px);
+  
+    /* center the whole 2x3 grid dynamically */
+    left: 50%;
+    top: 50%;
+    transform: translate(
+      calc(-50% - var(--s)/2),   /* move left by half spacing */
+      calc(-50% - var(--s))      /* move up by full spacing (2 rows) */
+    );
+  
+    /* 6-dot grid using spacing variable */
+    box-shadow:
+      var(--s) 0 0 currentColor,             /* Right neighbor */
+      0 var(--s) 0 currentColor,             /* Bottom neighbor */
+      var(--s) var(--s) 0 currentColor,      /* Bottom-Right neighbor */
+      0 calc(2 * var(--s)) 0 currentColor,   /* Bottom-Bottom neighbor */
+      var(--s) calc(2 * var(--s)) 0 currentColor; /* Bottom-Bottom-Right neighbor */
+  }

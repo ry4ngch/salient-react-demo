@@ -1,5 +1,5 @@
 import React from "react";
-import Table, {TableRow} from '../../utils/Salient/UI/Table/Table';
+import Table, {TableRow} from '../../utils/Salient/UI/Table/TableV2';
 import withPagination from "../../utils/Salient/UI/Pagination/withPagination";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
