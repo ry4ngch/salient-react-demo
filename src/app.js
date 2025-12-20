@@ -36,6 +36,7 @@ import ChartDemo from './pages/ChartDemo';
 import GridDemo from './pages/GridDemo';
 import MaintenancePage from './Maintenance';
 import ToolbarDemo from './pages/ToolbarDemo';
+import UploadDemo from './pages/UploadDemo';
 
 // import Navigate Provider context
 import { AppProvider } from './store/navigate-context';
@@ -126,6 +127,10 @@ const router = createBrowserRouter([
 			{
 				path: '/toolbar',
 				element: <ToolbarDemo/>
+			},
+			{
+				path: '/upload',
+				element: <UploadDemo/>
 			},
 
 		]
