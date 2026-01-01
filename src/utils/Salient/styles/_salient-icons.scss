@@ -638,34 +638,225 @@ $arrow-head-width: calc($arrow-line-width * 4);
     justify-content: center;
     align-items: center;
     color: inherit; /* grip color */
-  }
+}
   
-  .icon-drag::before {
+.icon-drag::before {
     content: '';
     position: absolute;
     border-radius: 50%;
-  
+
     /* calculate dot size based on icon size, fallback to 4px */
     width: var(--dot-size, 4px);
     height: var(--dot-size, 4px);
     background-color: currentColor;
-  
+
     /* spacing variable */
     --s: var(--spacing, 6px);
-  
+
     /* center the whole 2x3 grid dynamically */
     left: 50%;
     top: 50%;
     transform: translate(
-      calc(-50% - var(--s)/2),   /* move left by half spacing */
-      calc(-50% - var(--s))      /* move up by full spacing (2 rows) */
+        calc(-50% - var(--s)/2),   /* move left by half spacing */
+        calc(-50% - var(--s))      /* move up by full spacing (2 rows) */
     );
-  
+
     /* 6-dot grid using spacing variable */
     box-shadow:
-      var(--s) 0 0 currentColor,             /* Right neighbor */
-      0 var(--s) 0 currentColor,             /* Bottom neighbor */
-      var(--s) var(--s) 0 currentColor,      /* Bottom-Right neighbor */
-      0 calc(2 * var(--s)) 0 currentColor,   /* Bottom-Bottom neighbor */
-      var(--s) calc(2 * var(--s)) 0 currentColor; /* Bottom-Bottom-Right neighbor */
-  }
+        var(--s) 0 0 currentColor,             /* Right neighbor */
+        0 var(--s) 0 currentColor,             /* Bottom neighbor */
+        var(--s) var(--s) 0 currentColor,      /* Bottom-Right neighbor */
+        0 calc(2 * var(--s)) 0 currentColor,   /* Bottom-Bottom neighbor */
+        var(--s) calc(2 * var(--s)) 0 currentColor; /* Bottom-Bottom-Right neighbor */
+}
+
+.icon-close {
+
+    width: min(50%, 10px);
+    position: relative;
+
+    &::before,
+    &::after {
+        content: '';
+        display: block;
+        position: absolute;
+        width: 100%;
+        top: 50%;
+        left: 50%;
+        height: 2px;
+        border-radius: 1px;
+        box-shadow: 0 0 0 20px inset;
+    }
+
+    &::before {
+        transform: translate(-50%, -50%) rotate(135deg);
+    }
+
+    &::after {
+        transform: translate(-50%, -50%) rotate(-135deg);
+    }
+}
+
+.icon-phone{
+    display: block;
+    position: relative;
+
+    &:before{
+        width: 0.6em;
+        height: 0.9em;
+        border: 0.02em solid;
+        border-top: 0.1em solid;
+        border-bottom: 0.1em solid;
+        top: 0;
+        left: 0;
+        border-radius: 0.1em;
+    }
+}
+
+.icon-map-marker {
+    display: block;
+    position: relative;
+
+    &::before {
+        top: 0;
+        left: 0;
+        width: 0.7em;
+        height: 0.7em;
+        box-shadow: inset 0 0 0 0.08em;
+        border-radius: 50% 50% 50% 0;
+        transform: rotate(-45deg);
+    }
+}
+
+.icon-cloud {
+    // --width: 30px;
+    background-color: currentColor;
+    background-image: -webkit-linear-gradient(hsla(0,0%,0%,0), hsla(0,0%,0%,.1));
+    border-radius: 1em; //calc(var(--width)/3);
+    display: block;
+    position: relative;
+    aspect-ratio: 3/1;
+    width: 30px;
+
+    &::after,
+    &::before {
+        background-color: currentColor;
+        content: '';
+        border-radius: 100%;
+        position: absolute;
+    }
+
+    &::after {
+        background-image: -webkit-linear-gradient(hsla(0,0%,0%,0) 50%, hsla(0,0%,0%,.025));
+        // background: linear-gradient(
+        //     to bottom, 
+        //     currentColor 50%, /* Top color ends exactly at 50% */
+        //     transparent 50%  /* Bottom color starts exactly at 50% */
+        // ); 
+        height: 100%;
+        right: 12%;
+        top: -50%;
+        width: 30%;
+    }
+
+    &::before {
+        background-image: -webkit-linear-gradient(hsla(0,0%,0%,0) 50%, hsla(0,0%,0%,.075));
+        // background: linear-gradient(
+        //     to bottom, 
+        //     currentColor 50%, /* Top color ends exactly at 50% */
+        //     transparent 50%  /* Bottom color starts exactly at 50% */
+        // ); 
+        height: 160%;
+        left: 12%;
+        top: -75%;
+        width: 50%;
+    }
+}
+
+
+.icon-list {
+    display: block;
+    position: relative;
+
+    &::before, &::after {
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        height: 2px;
+        border-width: 6px 0;
+        border-style: double;
+        border-color: currentColor;
+        background: transparent;
+    }
+
+    &::before {
+        left: -2px;
+        width: 2px;
+    }
+    
+    &::after {
+        width: 12px;
+        
+    }
+}
+
+.icon-download {
+
+    position: relative;
+    display: block;
+
+    &::before {
+        width: 14px;
+        height: 8px;
+        border: 3px solid currentColor;
+        border-top: 0;
+        margin-top: -5px;
+        background: transparent;
+    }
+
+    &::after {
+        left: 5px;
+        border-width: 5px 5px 0;
+        border-style: solid;
+        border-color: currentColor transparent;
+        margin-top: -5px;
+        background: transparent;
+    }
+}
+
+// for stacking multiple icon on top of each other
+.stack-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+    vertical-align: middle;
+    justify-content: center;
+    flex-direction: row;
+    flex-basis: 100%;
+
+    *:not(:first-child) {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .invert-icon-color {
+        filter: invert(100%);
+    }
+
+    .blend-icon-color {
+        mix-blend-mode: difference;
+    }
+}
+
+@mixin generate-icon-sizes($sizes...) {
+    @each $size in $sizes {
+        .size-#{$size}x {
+            width: calc(#{$size}*1em);
+        }
+    }
+}
+
+@include generate-icon-sizes(2, 3, 4, 5, 6, 7, 8, 9, 10);
+  

@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
 import classNames from 'classnames';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Upload = ({ 
     supportedExtensions = [], 
@@ -174,7 +173,10 @@ const Upload = ({
                 >
                     {
                         !uploadIconClass ?
-                        <FontAwesomeIcon icon='fa-cloud-upload-alt' size="2x"/>
+                        <div className='stack-icon'>
+                            <i className="icon icon-cloud size-6x" style={{color: 'grey'}}/>
+                            <i className="icon icon-top-arrow invert-icon-color" style={{bottom: '-25%'}}/>
+                        </div>
                         :
                         <i className={`${uploadIconClass} upload-icon`}></i>
                     }
@@ -233,7 +235,7 @@ const FileItem = ({
     onRemove, 
     draggable, 
     dragIcon = 'icon icon-drag', 
-    fileDeleteIcon = 'fas fa-times', 
+    fileDeleteIcon = 'icon icon-close', 
     className,
     // Receiving new handlers
     onDragStart,

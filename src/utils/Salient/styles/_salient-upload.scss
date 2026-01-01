@@ -29,7 +29,7 @@
     }
 
     .dropzone {
-        border: 3px dashed #0D60FD;
+        border: 3px dashed #7ba1db;
         border-radius: 3px;
         width: 60%;
         display: flex;
@@ -126,10 +126,11 @@
         color: #000;
         padding: 4px;
         transition: color 0.2s;
+        opacity: 0.6;
     }
 
     .remove-btn:hover {
-        color: #ff4444;
+        opacity: 1;
     }
 
     .upload-footer {

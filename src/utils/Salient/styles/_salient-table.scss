@@ -543,9 +543,12 @@ table.gridView td {
     position: relative;           /* anchor for absolute drag handle */
     margin-bottom: .75em;
     border-bottom: 1px solid #ddd;
-    padding-left: var(--grip-width);           /* leave space for the left strip */
     box-sizing: border-box;
   }
+
+  table.sl-table.table-draggable tr {
+    padding-left: var(--grip-width);           /* leave space for the left strip */
+  } 
 
   /* --- left vertical drag handle strip ---
      placed absolutely so it spans full height of the card
