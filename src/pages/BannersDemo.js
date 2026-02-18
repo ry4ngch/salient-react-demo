@@ -8,7 +8,7 @@ const BannersDemo = () => {
 
     return (
         <React.Fragment>
-            <Banner theme="disabled" blockquoteStyle={true} onBannerDismiss={() => {alert('Additional Action trigger on closed')}}>
+            <Banner theme="disabled" blockquoteStyle={true} onBannerDismiss={() => {alert('Additional Action trigger on closed')}} icon={<i className="icon icon-forbidden"></i>}>
                 <BannerContent>
                     This is a typical banners with blockquote styling and the current one uses the <em style={{fontWeight: 'bold'}}>disabled</em> theme.
                 </BannerContent>
@@ -17,7 +17,7 @@ const BannersDemo = () => {
                 </BannerActions>
             </Banner>
 
-            <Banner theme="active" blockquoteStyle={true} allowBannerDismiss={false}>
+            <Banner theme="active" blockquoteStyle={true} allowBannerDismiss={false} icon={<i className="icon icon-success"></i>}>
                 <BannerContent>
                     This banner is a blockquote style banner that cannot be dismiss. This is set by the allowBannerDismiss props. The banner uses the <em style={{fontWeight: 'bold'}}>active</em> theme.
                 </BannerContent>
@@ -65,7 +65,7 @@ const BannersDemo = () => {
                 </BannerActions>
             </Banner>
 
-            <Banner theme="warn" blockquoteStyle={false}>
+            <Banner theme="warn" blockquoteStyle={false} icon={<i className="icon icon-warning"></i>}>
                 <BannerContent>
                 This is a normal banner without blockquote styling using the <em style={{fontWeight: 'bold'}}>warn</em> theme
                 </BannerContent>

@@ -24,7 +24,7 @@ const Avatar = ({
     );
     return (
         <div {...props} className={[avatarClasses, className].join(' ').trim()} style={{...style, '--avatar-size': size, '--border-gap': borderGap, '--border-rotation': borderRotation}} >
-            <div class="avatar-inner"></div>
+            <div className="avatar-inner"></div>
             <div className='avatar-icon'>
                 {children || <img src={src} alt={alt}/>}
             </div>

@@ -45,6 +45,8 @@ export default function AvatarDemo() {
                             />
                             <span style={{marginLeft: '5px'}}>Rectangular Avatar with Border</span>
                         </GridItem>
+                    </GridRow>
+                    <GridRow>
                         <GridItem>
                             <Avatar 
                                     size="80px" 

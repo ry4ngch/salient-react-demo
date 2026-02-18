@@ -38,6 +38,7 @@ import MaintenancePage from './Maintenance';
 import ToolbarDemo from './pages/ToolbarDemo';
 import UploadDemo from './pages/UploadDemo';
 import AvatarDemo from './pages/AvatarDemo';
+import IconsDemo from './pages/IconsDemo';
 
 // import Navigate Provider context
 import { AppProvider } from './store/navigate-context';
@@ -136,6 +137,10 @@ const router = createBrowserRouter([
 			{
 				path: '/avatar',
 				element: <AvatarDemo/>
+			},
+			{
+				path: '/icons',
+				element: <IconsDemo/>
 			},
 
 		]

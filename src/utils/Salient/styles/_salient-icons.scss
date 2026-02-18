@@ -18,10 +18,6 @@ $icon-size: 14px;
 .icon-flag, 
 .icon-tag, 
 .icon-link, 
-.icon-chevron-left, 
-.icon-chevron-right, 
-.icon-chevron-up, 
-.icon-chevron-down, 
 .icon-heart:before, 
 .icon-heart:after,
 .icon-left:after,
@@ -526,7 +522,7 @@ $arrow-head-width: calc($arrow-line-width * 4);
 .icon-top-arrow,
 .icon-bottom-arrow {
 	position: relative;
-	margin: auto;
+	// margin: auto;
 	line-height: 1;
 }
 
@@ -571,7 +567,7 @@ $arrow-head-width: calc($arrow-line-width * 4);
 .icon-sort-by-fill,
 .icon-top,
 .icon-bottom  {
-	height: min(50%, 15px);
+	height: max(50%, 16px);
 }
 
 .icon-sort-by::before,
@@ -801,7 +797,7 @@ $arrow-head-width: calc($arrow-line-width * 4);
 }
 
 .icon-download {
-
+    top: 50%;
     position: relative;
     display: block;
 
@@ -821,6 +817,110 @@ $arrow-head-width: calc($arrow-line-width * 4);
         border-color: currentColor transparent;
         margin-top: -5px;
         background: transparent;
+    }
+}
+
+
+.icon-success {
+    position: relative;
+    display: inline-block;
+    width: 20px;
+
+    &::before,
+    &::after {
+        top: 50%;
+    }
+    
+    &::before {
+        left:50%;
+        aspect-ratio: 1;
+        position: absolute;
+        width: inherit;
+        -webkit-border-radius:100%;
+        -moz-border-radius:100%;
+        border-radius:100%;
+        box-shadow:inset 0 0 0 2px;
+        transform: translate(-50%, -50%);
+    }
+
+    &::after {
+        left:50%;
+        width:3px;
+        height:8px;
+        position: absolute;
+        border-width:0 2px 2px 0;
+        border-style:solid;
+        -webkit-transform: translate(-50%, -50%) rotate(45deg);
+        -moz-transform:translate(-50%, -50%) rotate(45deg);
+        -ms-transform:translate(-50%, -50%) rotate(45deg);
+        -o-transform:translate(-50%, -50%) rotate(45deg);
+        transform:translate(-50%, -50%) rotate(45deg);
+    }
+}
+
+.icon-warning {
+    position: relative;
+    width: 20px;
+    height: 17px;
+    border-left: 3px solid transparent;
+    border-bottom: 3px solid
+}
+.icon-warning,
+.icon-warning::before {
+    display: block;
+    border-radius: 3px;
+    box-sizing: border-box;
+    border-right: 3px solid transparent
+}
+
+.icon-warning::before {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    left: 50%;
+    top: calc(100% + 1.75px);
+    border-left: 3px solid;
+    border-top: 3px solid;
+    border-bottom: 3px solid transparent;
+    transform: translate(-50%, -50%) rotate(45deg) skew(15deg,15deg);
+}
+
+.icon-warning::after {
+    content: '\0021';
+    position: absolute;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: bold;
+    top: calc(50% + 1.5px);
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+
+
+
+.icon-clock {
+    border-color: currentColor;
+    width: 18px;
+    aspect-ratio: 1;
+    border-radius: 100%;
+    border: 2px solid currentColor;
+    box-sizing: border-box;
+    position: relative;
+    
+    &:before {
+      width: 3px;
+      height: 4px;
+      position: absolute;
+      transform: translate(-50%, -50%);
+      top: 50%;
+      left: calc(50% + 1.5px);
+      margin-left: -1px;
+      content: '';
+      border-left: 2px solid currentColor;
+      border-bottom: 2px solid currentColor;
     }
 }
 
