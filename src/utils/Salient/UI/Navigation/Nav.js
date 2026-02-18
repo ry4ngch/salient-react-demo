@@ -104,23 +104,29 @@ const NavMenu = ({isNavCollapsed, navSlideDown = false, children, handleDropdown
       <div {...rest} className={navListClasses}>
         <ul className="navCollections" ref={rest.ref}>
           {React.Children.map(children, (child, index) => (
-            React.isValidElement(child) && child.props['data-dropdown'] !== undefined ? (
-              React.cloneElement(child, {
-                ...child.props,
-                onClick: () => handleDropdownClick(index),
-                tabIndex: 0,
-                children: React.Children.map(child.props.children, (grandChild) => {
-                  if (React.isValidElement(grandChild)) {
-                    const isDropdownMenu = grandChild.props.className?.includes('dropdown-menu');
-                    return React.cloneElement(grandChild, {
-                      ...grandChild.props,
-                      className: [grandChild.props.className, isDropdownMenu && activeDropdown === index ? 'active-dropdown' : ''].join(' ').trim()
-                    });
-                  }
-                  return grandChild;
+            React.isValidElement(child) ? 
+              (child.props['data-dropdown'] !== undefined ? (
+                React.cloneElement(child, {
+                  ...child.props,
+                  onClick: () => handleDropdownClick(index),
+                  tabIndex: 0,
+                  children: React.Children.map(child.props.children, (grandChild) => {
+                    if (React.isValidElement(grandChild)) {
+                      const isDropdownMenu = grandChild.props.className?.includes('dropdown-menu');
+                      return React.cloneElement(grandChild, {
+                        ...grandChild.props,
+                        className: [grandChild.props.className, isDropdownMenu && activeDropdown === index ? 'active-dropdown' : ''].join(' ').trim()
+                      });
+                    }
+                    return grandChild;
+                  })
                 })
-              })
-            ) : child
+              ) : React.cloneElement(child, { 
+                ...child.props,
+                onClick: () => {handleDropdownClick(index)},
+                tabIndex: 0 
+              })) 
+              : child
           ))}
         </ul>
         <div

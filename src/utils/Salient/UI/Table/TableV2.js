@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, Fragment, useState, useMemo } from "react";
+import React, { useRef, useEffect, Fragment, useState, useMemo, useCallback } from "react";
 import classNames from "classnames";
 import { tableSorter } from "../../helpers/Sort";
 
@@ -139,7 +139,7 @@ const Table = (props) => {
     });
   };
 
-  const handleBlur = (event) => {
+  const handleBlur = useCallback((event) => {
     const currentTarget = event.currentTarget;
 
     // Give the browser time to focus the next element
@@ -149,7 +149,7 @@ const Table = (props) => {
         setDropdownState(false);
       }
     });
-  };
+  }, [dropdownState]);
 
   return (
     <Fragment>
