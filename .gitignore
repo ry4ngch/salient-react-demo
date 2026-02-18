@@ -33,3 +33,7 @@ coverage/
 # Ignore OS generated files (Windows, Linux, etc.)
 Thumbs.db      # Windows
 Desktop.ini    # Windows
+
+# Ignore AI agent files
+.zencoder
+.zenflow

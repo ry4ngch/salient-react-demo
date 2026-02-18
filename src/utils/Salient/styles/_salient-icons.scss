@@ -628,8 +628,8 @@ $arrow-head-width: calc($arrow-line-width * 4);
 
 /** icon grip **/
 .icon-drag {
-    --dot-size: 4px; /* default dot size */
-    --spacing: 6px;  /* default spacing between dots */
+    --dot-size: 3px; /* default dot size */
+    --spacing: 5px;  /* default spacing between dots */
   
     width: 20px;     /* total icon width */
     height: 20px;    /* total icon height */

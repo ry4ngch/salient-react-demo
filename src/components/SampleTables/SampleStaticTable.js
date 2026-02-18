@@ -15,7 +15,7 @@ const SampleStaticTable = () => {
 
 
     return (
-        <Table draggable={true} columns={["Company", "Contact", "Country"]} showColToggleUI={true} showRowSelector={true} onRetrievedSelected={handleRetrievedRows} ref={tableRef} sortable={true}>
+        <Table draggable={true} columns={["Company", "Contact", "Country"]} showColToggleUI={true} showRowSelector={true} onRetrievedSelected={handleRetrievedRows} ref={tableRef} sortable={true} striped={true}>
             <TableRow>
                 <td data-field="Company">Alfreds Futterkiste</td>
                 <td data-field="Contact">Maria Anders</td>

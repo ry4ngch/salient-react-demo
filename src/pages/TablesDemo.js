@@ -49,23 +49,16 @@ const TablesDemo = () => {
         </CardInfo>
         <CardContent>
           <input type="text" placeholder="search filter..." style={{display:'block', width: '100%', padding: '.4em', marginBottom: '.2em', boxSizing: "border-box"}} onChange={(e) => setTableFilterValue(e.target.value)}/>
-          <SampleDynamicPaginatedTable items={filteredTable} itemsPerPage={3} showPageItemsControl={true} sortable={true}/>
+          <SampleDynamicPaginatedTable items={filteredTable} itemsPerPage={3} showPageItemsControl={true} sortable={true} bordered={true}/>
         </CardContent>
 
         <CardInfo>
-          <CardTitle>Dynamic Table with Pagination</CardTitle>
+          <CardTitle>Dynamic Table with Pagination (With Inner Border)</CardTitle>
           <p>using pagination externally</p>
-          <p>Note: The following props are pass to the Table component from this external paginated component</p>
-          <ul style={{listStyle: 'none'}}>
-            <li>&#10148; draggable</li>
-            <li>&#10148; showColToggleUI</li>
-            <li>&#10148; columns</li>
-            <li>&#10148; data</li>
-          </ul>
         </CardInfo>
         <CardContent>
           <input type="text" placeholder="search filter..." style={{display:'block', width: '100%', padding: '.4em', marginBottom: '.2em', boxSizing: "border-box"}} onChange={(e) => setTableFilterValue(e.target.value)}/>
-          <ExternalPaginatedTable items={filteredTable} itemsPerPage={5} draggable={true} showColToggleUI={true} columns={["Type", "Name", "Description", "Tags", "Last Viewed", "Expiration"]} showRowSelector={true}>
+          <ExternalPaginatedTable items={filteredTable} itemsPerPage={5} draggable={true} showColToggleUI={true} columns={["Type", "Name", "Description", "Tags", "Last Viewed", "Expiration"]} showRowSelector={true} bordered={true} tableInnerBordered={true}>
           {(paginatedItems) =>
             (Array.isArray(paginatedItems) ? paginatedItems : []).map((row, index) => (
               <TableRow key={index}>
@@ -87,7 +80,7 @@ const TablesDemo = () => {
           <SampleStaticPaginatedTable itemsPerPage={4}/>
         </CardContent>
         <CardInfo>
-          <CardTitle>Static Table No Pagination</CardTitle>
+          <CardTitle>Static Table No Pagination (With Striped)</CardTitle>
         </CardInfo>
         <CardContent>
           <SampleStaticTable />

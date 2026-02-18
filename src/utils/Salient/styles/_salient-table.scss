@@ -8,11 +8,21 @@ table.sl-table {
 .sl-table th,
 .sl-table td {
     padding: 8px;
-    border: 1px solid #ddd;
     overflow: hidden;
     vertical-align: middle;
     text-overflow: ellipsis;
     position: relative;
+}
+
+.sl-table.table-bordered:not(.table-bordered__inner) tbody,
+.sl-table.table-bordered:not(.table-bordered__inner) thead tr,
+.sl-table.table-bordered.table-bordered__inner th,
+.sl-table.table-bordered.table-bordered__inner td {
+    border: 1px solid #ddd;
+}
+
+.sl-table.table-striped tbody tr:not(.row-selected):nth-of-type(even) {
+    background-color: rgba(224, 224, 224, 0.3);
 }
 
 .sl-table tr {
@@ -49,7 +59,7 @@ table.sl-table {
   justify-content: center;
 
   cursor: grab;
-  background: #ddd;
+  // background: #ddd;
   opacity: 0.6;
   transition: opacity 0.15s ease;
 
@@ -541,9 +551,12 @@ table.gridView td {
   table.sl-table tr {
     display: block;               /* behave like a card */
     position: relative;           /* anchor for absolute drag handle */
-    margin-bottom: .75em;
-    border-bottom: 1px solid #ddd;
+    // margin-bottom: .75em;
     box-sizing: border-box;
+  }
+
+  table.sl-table tr:not(:last-child) {
+    border-bottom: 1px solid #ddd;
   }
 
   table.sl-table.table-draggable tr {

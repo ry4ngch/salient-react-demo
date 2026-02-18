@@ -46,7 +46,10 @@ const Table = (props) => {
   const toggleColumnVisibility = (index) => setHiddenColumns(prev => ({ ...prev, [index]: !prev[index] }));
 
     const tableClasses = classNames("sl-table", {
-        "table-draggable": props.draggable 
+        "table-draggable": props.draggable,
+        "table-bordered": props.bordered,
+        "table-bordered__inner": props.tableInnerBordered,
+        "table-striped": props.striped
     });
 
   /*** Drag functions ***/
@@ -136,11 +139,23 @@ const Table = (props) => {
     });
   };
 
+  const handleBlur = (event) => {
+    const currentTarget = event.currentTarget;
+
+    // Give the browser time to focus the next element
+    requestAnimationFrame(() => {
+      // Check if the new focused element is still a child of the container
+      if (!currentTarget.contains(document.activeElement)) {
+        setDropdownState(false);
+      }
+    });
+  };
+
   return (
     <Fragment>
       <div className="btn-group">
         {props.showColToggleUI && (
-          <div className={["dropdown-btn", dropdownState ? "dropdown-open" : ""].join(" ").trim()}>
+          <div className={["dropdown-btn", dropdownState ? "dropdown-open" : ""].join(" ").trim()} onBlur={handleBlur}>
             <button className="btn" onClick={() => setDropdownState(!dropdownState)}>
               <span className="icon icon-filter" />
             </button>
@@ -230,7 +245,10 @@ Table.defaultProps = {
   showColToggleUI: false,
   showRowSelector: false,
   retrieveRowsBtnTitle: "Retrieve Rows",
-  sortable: false
+  sortable: false,
+  tableInnerBordered: false,
+  bordered: true,
+  striped: false
 };
 
 /**
