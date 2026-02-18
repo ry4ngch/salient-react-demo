@@ -37,6 +37,7 @@ import GridDemo from './pages/GridDemo';
 import MaintenancePage from './Maintenance';
 import ToolbarDemo from './pages/ToolbarDemo';
 import UploadDemo from './pages/UploadDemo';
+import AvatarDemo from './pages/AvatarDemo';
 
 // import Navigate Provider context
 import { AppProvider } from './store/navigate-context';
@@ -131,6 +132,10 @@ const router = createBrowserRouter([
 			{
 				path: '/upload',
 				element: <UploadDemo/>
+			},
+			{
+				path: '/avatar',
+				element: <AvatarDemo/>
 			},
 
 		]

@@ -1,0 +1,110 @@
+:root {
+    --avatar-size: 100px;
+    --bg1: #ddd;
+    --bgBorder: #c5c5c5;
+    --accent: #fff;
+    --catchLightAfterSize: 12px;
+    --catchLightBeforeSize: 8px;
+    --borderLineType: dashed;
+    --border-gap: 20px;
+}
+
+.avatar {
+    padding: var(--border-gap);
+    position: relative;
+    display: inline-grid;
+}
+
+.avatar * {
+    box-sizing: border-box;
+}
+
+.avatar-icon {
+    height: var(--avatar-size);
+    width: var(--avatar-size);
+    min-height: var(--avatar-size);
+    min-width: var(--avatar-size);
+    max-height: var(--avatar-size);
+    max-width: var(--avatar-size);
+
+    background-size: cover;
+    background-position: center;
+    background-color: var(--bg1);
+
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+
+    justify-self: center;
+    text-align: center;
+}
+
+.avatar-icon:hover {
+    cursor: pointer;
+}
+
+.avatar-inner {
+    position: absolute;
+    inset: 0;
+}
+
+/* border style */
+.avatar-border .avatar-inner {
+    border: var(--borderLineType) 1px var(--bgBorder);
+}
+
+/* catch light effect */
+.avatar-catch-light .avatar-inner {
+    rotate: var(--border-rotation, 0deg);
+}
+
+.avatar-catch-light .avatar-inner::before,
+.avatar-catch-light .avatar-inner::after {
+    content: '';
+    position: absolute;
+    transform: translate(-50%, -50%);
+    background-color: var(--accent);
+    border: solid 1px var(--bgBorder);
+}
+
+.avatar-catch-light .avatar-inner::before {
+    height: var(--catchLightBeforeSize);
+    width: var(--catchLightBeforeSize);
+    top: 0;
+    left: 50%;
+}
+
+.avatar-catch-light .avatar-inner::after {
+    height: var(--catchLightAfterSize);
+    width: var(--catchLightAfterSize);
+    top: 100%;
+    left: 50%;
+}
+
+/* inner image scaling */
+.avatar-icon > * {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    height: var(--icon-height, auto);
+    width: var(--icon-width, auto);
+    max-height: 100%;
+    max-width: 100%;
+}
+
+/* circle */
+.avatar-circle .avatar-icon,
+.avatar-circle .avatar-icon > *,
+.avatar-circle .avatar-inner,
+.avatar-circle .avatar-inner::before,
+.avatar-circle .avatar-inner::after {
+    border-radius: 50%;
+}
+
+/* rectangle */
+.avatar-rect .avatar-icon,
+.avatar-rect .avatar-icon > * {
+    border-radius: 4px;
+}
