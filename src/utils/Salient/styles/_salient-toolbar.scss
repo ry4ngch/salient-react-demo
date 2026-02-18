@@ -171,7 +171,7 @@
 
 	&.tooltip__left {
 		top: 0;
-		left: -50%;
+		left: calc(-50% - var(--tooltip-arrow-size));
 
 		&::before {
 			bottom: 50%;
