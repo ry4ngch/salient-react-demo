@@ -1,10 +1,62 @@
-# salient-react-demo
+# Salient React
 
-This is the demo repository for the `react_basic` boilerplate but modified to integrate with `react-router-dom` for page change.
+Salient UI Component Library for React
 
-To view the original source codes for the boilerplate repository, see the github repository: [React Boilerplates](https://github.com/ry4ngch/react-boilerplates)
+## Installation
 
-To visit the demo application, click the link below:
-[Salient React App Demo](https://salient-react-demo.vercel.app/).
+```bash
+npm install salient-react
+```
 
+## Usage
 
+```jsx
+import { Button, Table, Card } from 'salient-react';
+import 'salient-react/dist/salient-react.css';
+
+function App() {
+  return (
+    <div>
+      <Button variant="primary">Click Me</Button>
+      <Card title="Hello World">
+        This is a Salient UI Card component
+      </Card>
+    </div>
+  );
+}
+```
+
+## Available Components
+
+- Accordian
+- Avatar
+- Badge
+- Banner
+- Breadcrumb
+- Button
+- Card
+- BarChart
+- Drawer
+- Dropdown
+- Form Fields (TextField, NumericField, RangeSlider)
+- Grid
+- List
+- Modal
+- Navigation
+- Pagination HOC
+- Progress
+- Sidebar
+- Tab
+- Table / TableV2
+- Timeline
+- Toolbar
+- Treeview
+- Upload
+
+## Demo Application
+
+Live demo is available at: [Salient React App Demo](https://salient-react-demo.vercel.app/)
+
+## License
+
+MIT
