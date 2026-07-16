@@ -27,8 +27,7 @@ export { default as withPagination } from './utils/Salient/UI/Pagination/withPag
 export { default as Progress } from './utils/Salient/UI/Progress/Progress';
 export { default as Sidebar } from './utils/Salient/UI/Sidebar/Sidebar';
 export { default as Tab } from './utils/Salient/UI/Tab/Tab';
-export { default as Table } from './utils/Salient/UI/Table/Table';
-export { default as TableV2 } from './utils/Salient/UI/Table/TableV2';
+export { default as Table } from './utils/Salient/UI/Table/TableV2';
 export { default as Timeline } from './utils/Salient/UI/Timeline/Timeline';
 export { default as Toolbar } from './utils/Salient/UI/Toolbar/Toolbar';
 export { default as Treeview } from './utils/Salient/UI/Treeview/Treeview';

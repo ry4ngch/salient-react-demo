@@ -35,5 +35,8 @@ jobs:
       # - name: Run ESLint
       #   run: npm run lint
 
+      - name: Build library distribution
+        run: npm run build:lib
+
       - name: Run Jest tests
         run: npm test

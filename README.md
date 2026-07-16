@@ -47,7 +47,7 @@ function App() {
 - Progress
 - Sidebar
 - Tab
-- Table / TableV2
+- Table
 - Timeline
 - Toolbar
 - Treeview
