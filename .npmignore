@@ -1,0 +1,42 @@
+# Development files
+src/
+public/
+.github/
+node_modules/
+
+# Build configs
+webpack.dev.js
+webpack.prod.js
+webpack.common.js
+jest.config.js
+eslint.config.mjs
+.babelrc
+.nvmrc
+vercel.json
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Demo files
+src/pages/
+src/containers/
+src/layout/
+src/components/
+src/store/
+src/styles/
+src/app.js
+src/index.html
+src/Maintenance.js
+src/Maintenance.css

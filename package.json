@@ -1,8 +1,33 @@
 {
-  "name": "salient-react-demo",
+  "name": "salient-react",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Salient UI Component Library for React",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/",
+    "README.md",
+    "LICENSE.txt"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ry4ngch/salient-react.git"
+  },
+  "keywords": [
+    "react",
+    "ui",
+    "components",
+    "library",
+    "salient",
+    "table",
+    "forms",
+    "buttons"
+  ],
+  "peerDependencies": {
+    "react": ">=17.0.0",
+    "react-dom": ">=17.0.0"
+  },
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watchAll",
@@ -10,10 +35,13 @@
     "lint": "eslint src",
     "build-babel": "babel src/app.js --out-file=public/scripts/app.js --presets=env,react --watch",
     "build": "webpack --mode production --config webpack.prod.js",
+    "build:lib": "webpack --config webpack.lib.js",
     "build-file": "cross-env FILE=$npm_package_config_file babel $FILE --out-file=public/scripts/app.js --presets=env,react --watch",
     "demo": "cross-env echo $npm_package_config_file",
     "serve": "live-server public",
-    "dev-server": "webpack serve --mode development --config webpack.dev.js --open"
+    "dev-server": "webpack serve --mode development --config webpack.dev.js --open",
+    "prepare": "npm run build:lib",
+    "prepublishOnly": "npm run lint && npm run test"
   },
   "author": "Ryan",
   "license": "MIT",
